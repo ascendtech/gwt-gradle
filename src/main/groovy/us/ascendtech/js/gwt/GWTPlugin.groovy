@@ -30,6 +30,9 @@ class GWTPlugin implements Plugin<Project> {
             maven {
                 url 'https://jitpack.io'
             }
+            maven {
+                url 'https://raw.githubusercontent.com/intendia-oss/rxjava-gwt/mvn-repo/'
+            }
         }
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
