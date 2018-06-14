@@ -11,7 +11,7 @@ build.gradle
 ```gradle
 
 plugins {
-    id "us.ascendtech.js.gwt" version "0.1.3"
+    id "us.ascendtech.js.gwt" version "0.1.4"
 }
 
 gwt {
