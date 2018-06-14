@@ -1,0 +1,54 @@
+plugins {
+    id('groovy')
+    id 'com.gradle.plugin-publish' version '0.9.7'
+}
+
+group = 'us.ascendtech'
+version = '0.1'
+
+
+
+repositories {
+    mavenCentral()
+    //for gwt 2.8.2-rx1
+    maven {
+        url "https://raw.githubusercontent.com/intendia-oss/rxjava-gwt/mvn-repo/"
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile "org.codehaus.plexus:plexus-archiver:3.5"
+    compile "org.codehaus.plexus:plexus-container-default:1.7.1"
+    compile "com.google.gwt:gwt-dev:2.8.2-rx1"
+    compile "com.github.tbroyer:gwt-devserver:-SNAPSHOT"
+    compile "org.eclipse.jetty:jetty-proxy:9.2.14.v20151106"
+
+    testCompile gradleTestKit()
+
+}
+
+pluginBundle {
+    website = 'https://github.com/ascendtech/gwt-gradle'
+    vcsUrl = 'https://github.com/ascendtech/gwt-gradle'
+
+    plugins {
+        npmPlugin {
+            id = 'us.ascendtech.js.npm'
+            displayName = 'NPM/Webpack plugin'
+            description = 'Plugin for npm and webpack support in gradle'
+            tags = ['webpack','npm']
+        }
+        gwtPlugin {
+            id = 'us.ascendtech.js.gwt'
+            displayName = 'Modern GWT plugin'
+            description = 'Plugin for modern GWT projects'
+            tags = ['gwt','webpack','npm']
+        }
+    }
+
+}
