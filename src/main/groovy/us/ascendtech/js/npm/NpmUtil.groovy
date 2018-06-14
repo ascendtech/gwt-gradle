@@ -74,7 +74,7 @@ class NpmUtil {
 
                 target.mkdirs()
 
-                final UnArchiver unArchiver;
+                final UnArchiver unArchiver
 
                 if (ext == "tar.xz") {
                     unArchiver = new NodeJsTarXzUnArchiver()
@@ -124,13 +124,13 @@ class NpmUtil {
     }
 
     File resolveModule(final String module) {
-        final File globalFile = new File(this.modules, module);
+        final File globalFile = new File(this.modules, module)
         if (globalFile.exists()) {
             return globalFile
         }
 
 
-        final File localFile = new File("node_modules", module);
+        final File localFile = new File("node_modules", module)
         if (localFile.exists()) {
             return localFile
         }
@@ -147,18 +147,18 @@ class NpmUtil {
             name = command
         }
 
-        final File absoluteFile = new File(name);
+        final File absoluteFile = new File(name)
         if (absoluteFile.exists()) {
             return absoluteFile
         }
 
-        final File globalFile = new File(this.bin, name);
+        final File globalFile = new File(this.bin, name)
         if (globalFile.exists()) {
             return globalFile
         }
 
 
-        final File localFile = new File("node_modules/.bin", name);
+        final File localFile = new File("node_modules/.bin", name)
         if (localFile.exists()) {
             return localFile
         }

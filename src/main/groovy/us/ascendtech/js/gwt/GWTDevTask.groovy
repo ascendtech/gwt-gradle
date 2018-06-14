@@ -24,7 +24,7 @@ class GWTDevTask extends JavaExec {
 
     @Override
     void exec() {
-        def gwt = project.extensions.gwt;
+        def gwt = project.extensions.gwt
 
         def allProjects = [] as LinkedHashSet
         GWTCompileTask.collectDependedUponProjects(project, allProjects, "compile")
