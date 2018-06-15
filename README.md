@@ -3,6 +3,8 @@
 This is intended for use with modern GWT projects.  Currently it aims to support projects that will 
 be ready for GWT 3.x.
 
+NPM/Webpack has been adapted from work by https://github.com/solugo/gradle-nodejs-plugin
+
 
 ## Basic Usage
 
@@ -36,3 +38,4 @@ gradlew webpackDev
 #new terminal
 gradle compileJava -t
 ```
+
