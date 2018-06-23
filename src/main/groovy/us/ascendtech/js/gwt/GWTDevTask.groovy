@@ -57,8 +57,7 @@ class GWTDevTask extends JavaExec {
         def runtimeConfiguration = project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
 
 
-        def buildPluginPath = project.getRootProject().file("buildSrc" + File.separator + "build" + File.separator + "classes" + File.separator + "groovy" + File.separator + "main")
-        classpath = project.files(buildPluginPath, runtimeConfiguration, compileOnlyConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
+        classpath = project.files(runtimeConfiguration, compileOnlyConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
 
         allProjects.each { p ->
             p.configurations['source'].allArtifacts.getFiles().each {
