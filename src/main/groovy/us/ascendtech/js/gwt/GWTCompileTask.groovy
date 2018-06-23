@@ -79,9 +79,12 @@ class GWTCompileTask extends JavaExec {
         classpath = project.files(compileOnlyConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
 
         allProjects.each { p ->
-            p.configurations['source'].allArtifacts.getFiles().each {
-                logger.info("Add {} to GWT classpath!", it)
-                classpath += it
+            if (p.configurations.find { it.name == 'source' }) {
+                p.configurations['source'].allArtifacts.getFiles().each {
+                    logger.info("Add {} to GWT classpath!", it)
+                    classpath += project.files(it)
+                }
+
             }
         }
 
