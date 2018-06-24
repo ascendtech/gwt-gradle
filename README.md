@@ -1,10 +1,7 @@
 # gwt-gradle
 
-This is intended for use with modern GWT projects.  Currently it aims to support projects that will 
-be ready for GWT 3.x.
-
-NPM/Webpack has been adapted from work by https://github.com/solugo/gradle-nodejs-plugin
-
+A plugin for modern GWT projects.  Currently it aims to support projects that will 
+be ready for GWT 3.x.  See below for the NPM/Webpack plugin.
 
 ## Basic Usage
 
@@ -40,6 +37,9 @@ gradle compileJava -t
 ```
 
 # npm-gradle 
+
+NPM
+
 build.gradle
 ```gradle
 plugins {
