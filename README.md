@@ -37,6 +37,7 @@ gradle compileJava -t
 ```
 
 # npm-gradle 
+A plugin that downloads and runs NPM and webpack.  Based on the work of https://github.com/solugo/gradle-nodejs-plugin.  NodeJS is downloaded to ~/.nodejs/version/.
 
 NPM
 
@@ -131,13 +132,13 @@ module.exports = {
 
 NPM tasks
 ```bash
-gradle npmClean //rm -rf node_modules
+gradle npmClean #rm -rf node_modules
 
-gradle npmInstall //npm install
+gradle npmInstall #npm install
 
-gradle npmInstallSave --npmModule vue //npm install vue --save
-gradle npmInstallSaveDev --npmModule vue //npm install vue --save-dev
+gradle npmInstallSave --npmModule vue #npm install vue --save
+gradle npmInstallSaveDev --npmModule vue #npm install vue --save-dev
 
-gradle webpack //webpack-cli --mode=production --output-path build/js
-gradle webpackDev //webpack-dev-server --mode development --content-base ${npm.contentBase}
+gradle webpack #webpack-cli --mode=production --output-path build/js
+gradle webpackDev #webpack-dev-server --mode development --content-base ${npm.contentBase}
 
