@@ -39,11 +39,11 @@ gradlew webpackDev
 gradle compileJava -t
 ```
 
-# webpack-gradle
+# npm-gradle 
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.gwt" version "0.1.4"
+    id "us.ascendtech.js.npm" version "0.1.4"
 }
 
 //all optional, defaults shown
