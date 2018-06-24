@@ -21,7 +21,7 @@ gwt {
 
 Compile to tar gz bundle for deploy on web server
 ```bash
-gradle gwtArchive
+gradle gwtArchive #archive in build/webapp
 ```
 
 Run gwt devmode with webpack backend
