@@ -28,26 +28,26 @@ class NpmPlugin implements Plugin<Project> {
 
         project.task("npmInstall", type: NpmTask) {
             baseCmd = "npm"
-            baseArgs = "install"
+            baseArgs = ["install"]
             inputs.file(project.file("package.json"))
             outputs.dir(project.file("node_modules"))
         }
 
         project.task("npmInstallSaveDev", type: NpmTask) {
             baseCmd = "npm"
-            baseArgs = "install"
-            argsSuffix = "--save-dev"
+            baseArgs = ["install"]
+            argsSuffix = ["--save-dev"]
         }
 
         project.task("npmInstallSave", type: NpmTask) {
             baseCmd = "npm"
-            baseArgs = "install"
-            argsSuffix = "--save"
+            baseArgs = ["install"]
+            argsSuffix = ["--save"]
         }
 
         project.tasks.create(name: "webpack", type: NpmTask, dependsOn: "npmInstall") {
             baseCmd = "webpack-cli"
-            baseArgs = "--mode=production --output-path ${npm.webpackOutputBase}"
+            baseArgs = ["--mode=production", "--output-path", "${npm.webpackOutputBase}"]
             inputs.file(project.file("webpack.config.js"))
             inputs.file(project.file("package-lock.json"))
             inputs.dir(npm.webpackInputBase)
@@ -56,9 +56,9 @@ class NpmPlugin implements Plugin<Project> {
 
         project.tasks.create(name: "webpackDev", type: NpmTask, dependsOn: "npmInstall") {
             baseCmd = "webpack-dev-server"
-            baseArgs = "--mode development --content-base ${npm.contentBase}"
+            baseArgs = ["--mode development", "--content-base", "${npm.contentBase}"]
         }
-        
+
     }
 
 }

@@ -13,8 +13,8 @@ import javax.inject.Inject
 class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
     def baseCmd = ""
-    def baseArgs = ""
-    def argsSuffix = ""
+    def baseArgs = []
+    def argsSuffix = []
     def npmModule = ""
 
 
@@ -38,7 +38,9 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
         final commandLine = new ArrayList<String>()
 
-        final String exec = nodeUtil.resolveCommand(baseCmd)
+        def nodeModulesDir = project.file("node_modules");
+
+        final String exec = nodeUtil.resolveCommand(nodeModulesDir, baseCmd)
         if (exec == null) {
             throw new RuntimeException((String) "Cannot find " + baseCmd + ".  Is it npm installed?")
         }
@@ -46,7 +48,7 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
         commandLine.add(exec)
 
         if (baseArgs != null) {
-            commandLine.addAll(Arrays.asList(baseArgs.split()))
+            commandLine.addAll(baseArgs)
         }
 
         if (npmModule != null) {
@@ -54,7 +56,7 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
         }
 
         if (argsSuffix != null) {
-            commandLine.addAll(Arrays.asList(argsSuffix.split()))
+            commandLine.addAll(argsSuffix)
         }
 
         println "Adding to path ${nodeUtil.bin.absolutePath}"

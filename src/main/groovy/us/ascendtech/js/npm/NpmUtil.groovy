@@ -139,7 +139,7 @@ class NpmUtil {
     }
 
 
-    File resolveCommand(final String command) {
+    File resolveCommand(final File nodeModulesDir, final String command) {
         final String name
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             name = "${command}.cmd"
@@ -158,7 +158,7 @@ class NpmUtil {
         }
 
 
-        final File localFile = new File("node_modules/.bin", name)
+        final File localFile = new File((String)nodeModulesDir + File.separator + ".bin", name)
         if (localFile.exists()) {
             return localFile
         }

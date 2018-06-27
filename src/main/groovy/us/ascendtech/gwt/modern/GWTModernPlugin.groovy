@@ -1,11 +1,14 @@
-package us.ascendtech.js.gwt
+package us.ascendtech.gwt.modern
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.bundling.Compression
 import org.gradle.api.tasks.bundling.Tar
-import org.gradle.jvm.tasks.Jar
+import us.ascendtech.gwt.common.GWTCompileTask
+import us.ascendtech.gwt.common.GWTExtension
+import us.ascendtech.gwt.lib.GWTLibPlugin
 import us.ascendtech.js.npm.NpmExtension
 import us.ascendtech.js.npm.NpmPlugin
 
@@ -14,15 +17,16 @@ import us.ascendtech.js.npm.NpmPlugin
  * @author Matt Davis
  * Apache 2.0 License
  */
-class GWTPlugin implements Plugin<Project> {
+class GWTModernPlugin implements Plugin<Project> {
 
 
     @Override
     void apply(final Project project) {
         project.pluginManager.apply(NpmPlugin)
         project.getPluginManager().apply(JavaPlugin.class)
+        project.getPluginManager().apply(GWTLibPlugin.class)
 
-        def gwt = project.extensions.create("gwt", GWTExtension)
+        def gwt = project.extensions.findByType(GWTExtension)
         def npm = project.extensions.findByType(NpmExtension)
 
 
@@ -30,18 +34,12 @@ class GWTPlugin implements Plugin<Project> {
             maven {
                 url 'https://jitpack.io'
             }
-            maven {
-                url 'https://raw.githubusercontent.com/intendia-oss/rxjava-gwt/mvn-repo/'
-            }
         }
 
-        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
-        compileOnlyConfiguration.defaultDependencies { deps ->
-            deps.add(project.dependencies.create("com.google.gwt:gwt-dev:${gwt.gwtVersion}"))
-            deps.add(project.dependencies.create("com.google.gwt:gwt-user:${gwt.gwtVersion}"))
-            deps.add(project.dependencies.create("org.eclipse.jetty:jetty-proxy:9.2.14.v20151106"))
-            deps.add(project.dependencies.create("com.github.tbroyer:gwt-devserver:-SNAPSHOT"))
-        }
+        def gwtConf = project.configurations.create("gwt")
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion))
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.eclipse.jetty", "jetty-proxy", "9.2.14.v20151106"))
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.github.tbroyer", "gwt-devserver", "-SNAPSHOT"))
 
 
         final File gwtExtraDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "extras")
@@ -49,18 +47,13 @@ class GWTPlugin implements Plugin<Project> {
         final File codeServerDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "codeServer")
 
 
-        project.task("sourceJar", type: Jar) {
-            classifier = 'sources'
-            from project.sourceSets.main.allSource
-        }
-
         project.task("gwtCompile", type: GWTCompileTask, dependsOn: ["classes", "webpack"]) {
             outputDir = gwtOutputDir
             extraOutputDir = gwtExtraDir
             modules = gwt.modules
         }
 
-        project.task("gwtDev", type: GWTDevTask, dependsOn: "classes") {
+        project.task("gwtDev", type: GWTModernDevTask, dependsOn: "classes") {
             workDir = codeServerDir
             proxy = gwt.proxy
             modules = gwt.modules
@@ -73,17 +66,6 @@ class GWTPlugin implements Plugin<Project> {
             from npm.contentBase
             from npm.webpackOutputBase
         }
-
-        project.tasks.compileJava.options.compilerArgs << '-parameters'
-        project.tasks.compileJava.dependsOn(project.tasks.processResources)
-
-        project.sourceSets.main.output.resourcesDir = "build/classes/java/main"
-
-        project.tasks.jar.dependsOn(project.tasks.sourceJar)
-
-        project.configurations.create("source")
-
-        project.artifacts.add("source", project.tasks.sourceJar)
 
 
     }

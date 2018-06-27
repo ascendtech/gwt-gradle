@@ -13,9 +13,16 @@ class NpmExtension {
         webpackOutputBase = project.file(project.getBuildDir().name + File.separator + "js").getAbsolutePath()
     }
 
+    //version of node js to download and use
     String nodeJsVersion = "10.4.0"
+
+    //this is where additional content is served from in webpack dev mode
     String contentBase = "./src/main/webapp/public/"
+
+    //this is used to check if the webpack task needs to be rerun or is up to date
     String webpackInputBase = "./src/main/webapp/"
+
+    //this is set to build/js and is not configurable currently
     String webpackOutputBase = ""
 
 }

@@ -1,4 +1,4 @@
-package us.ascendtech.js.gwt
+package us.ascendtech.gwt.common
 
 /**
  * @author Matt Davis
@@ -10,6 +10,7 @@ class GWTExtension {
     //JDT (https://bugs.eclipse.org/bugs/show_bug.cgi?id=521438)
     String gwtVersion = "2.8.2-rx1"
 
+    //list of modules to compile or run
     Collection<String> modules = []
 
     //Script output style: DETAILED, OBFUSCATED or PRETTY (defaults to OBFUSCATED)
@@ -21,5 +22,9 @@ class GWTExtension {
     //The number of local workers to use when compiling permutations
     int localWorkers = Runtime.getRuntime().availableProcessors()
 
+    //webpack backend address when using with webpack
     String proxy = "http://localhost:8080"
+
+    //include gwt user
+    boolean includeGwtUser = true
 }
