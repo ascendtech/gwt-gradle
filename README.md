@@ -10,7 +10,7 @@ build.gradle
 ```gradle
 
 plugins {
-    id "us.ascendtech.js.gwt" version "0.1.4"
+  id "us.ascendtech.gwt.modern" version "0.2.0"
 }
 
 gwt {
@@ -18,6 +18,29 @@ gwt {
 }
 
 ```
+
+gwt lib
+```gradle
+
+//gwt lib build.gradle
+plugins {
+    id "us.ascendtech.gwt.lib" version "0.2.1"
+}
+
+//app build.gradle
+plugins {
+  id "us.ascendtech.gwt.modern" version "0.2.1"
+}
+gwt {
+    modules = ['com.company.SomeModule']   
+}
+
+dependencies {
+    compile project(':someGwtLibProject')   
+}
+
+```
+
 
 Compile to tar gz bundle for deploy on web server
 ```bash
@@ -44,7 +67,7 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.1.4"
+    id "us.ascendtech.js.npm" version "0.2.1"
 }
 
 //all optional, defaults shown
