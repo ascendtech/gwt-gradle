@@ -10,7 +10,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.2.0"
+  id "us.ascendtech.gwt.modern" version "0.2.1"
 }
 
 gwt {
