@@ -1,7 +1,6 @@
-# gwt-gradle
 
-A plugin for modern GWT projects.  Currently it aims to support projects that will 
-be ready for GWT 3.x.  See below for the NPM/Webpack plugin.
+# gwt.modern
+A plugin for GWT 2.8.x projects using webpack and npm.  Aims to be ready for GWT 3.x. Compiles to archive file for deploy on web server.
 
 ## Basic Usage
 
@@ -58,6 +57,54 @@ gradlew webpackDev
 #new terminal
 gradle compileJava -t
 ```
+
+
+# gwt.classic
+
+A plugin for GWT 2.8 projects.  Compiles to war
+
+## Basic Usage
+
+
+build.gradle
+```gradle
+
+plugins {
+  id "us.ascendtech.gwt.classic" version "0.2.1"
+}
+
+gwt {
+    modules = ['com.company.SomeModule']   
+}
+
+```
+
+gwt lib
+```gradle
+
+//gwt lib build.gradle
+plugins {
+    id "us.ascendtech.gwt.lib" version "0.2.1"
+}
+
+//app build.gradle
+plugins {
+  id "us.ascendtech.gwt.classic" version "0.2.1"
+}
+gwt {
+    modules = ['com.company.SomeModule']   
+}
+
+dependencies {
+    compile project(':someGwtLibProject')   
+}
+
+```
+
+Create war
+```bash
+gradle war #war file in build/libs
+
 
 # npm-gradle 
 A plugin that downloads and runs NPM and webpack.  Based on the work of https://github.com/solugo/gradle-nodejs-plugin.  NodeJS is downloaded to ~/.nodejs/version/.
