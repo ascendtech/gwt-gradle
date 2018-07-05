@@ -33,26 +33,23 @@ class NpmUtil {
             ext = "zip"
             modules = new File(target, "node_modules")
             bin = target
-        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
-            platform = "linux"
-            ext = "tar.xz"
-            modules = new File(target, "lib/node_modules")
-            bin = new File(target, "bin")
         } else if (Os.isFamily(Os.FAMILY_MAC)) {
             platform = "darwin"
             ext = "tar.gz"
             modules = new File(target, "lib")
             bin = new File(target, "bin")
+        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+            platform = "linux"
+            ext = "tar.xz"
+            modules = new File(target, "lib/node_modules")
+            bin = new File(target, "bin")
         } else {
             throw new UnsupportedOperationException("Platform not supported")
         }
 
-        if (Os.isArch("amd64")) {
-            arch = "x64"
-        } else if (Os.isArch("x86")) {
+	arch = "x64"; // default x64
+        if (Os.isArch("x86")) {
             arch = "x86"
-        } else {
-            throw new UnsupportedOperationException("Architecture not supported")
         }
 
         if (!target.exists()) {
