@@ -62,8 +62,8 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
         println "Adding to path ${nodeUtil.bin.absolutePath}"
 
         try {
-            this.environment 'PATH', "${nodeUtil.bin.absolutePath}:${environment.PATH}"
-            this.environment 'Path', "${nodeUtil.bin.absolutePath}:${environment.Path}"
+            this.environment 'PATH', "${nodeUtil.bin.absolutePath}${File.pathSeparator}${environment.PATH}"
+            this.environment 'Path', "${nodeUtil.bin.absolutePath}${File.pathSeparator}${environment.Path}"
             this.commandLine(commandLine)
             println "Running " + commandLine
             super.exec()
