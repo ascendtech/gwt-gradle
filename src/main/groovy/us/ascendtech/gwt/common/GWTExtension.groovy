@@ -14,10 +14,11 @@ class GWTExtension {
     Collection<String> modules = []
 
     //list of libs to include
-    // current options "vue", "autorest", "elemento-core"
-    // vue is 1.0-beta-9
-    // autorest is 0.9
-    // elemento-core is 0.8.7 or 0.8.7-gwt2 depending on the includeGwtUser flag
+    // current options "vue", "autorest", "elemento-core", "ast-highcharts"
+    // vue is 1.0-beta-9 (https://github.com/VueGWT/vue-gwt)
+    // autorest is 0.9 (https://github.com/intendia-oss/autorest)
+    // elemento-core is 0.8.7 or 0.8.7-gwt2 depending on the includeGwtUser flag (https://github.com/hal/elemento)
+    // ast-highcharts is 1.0.0 (https://github.com/ascendtech/gwt-highcharts)
     Collection<String> libs = []
 
     //Script output style: DETAILED, OBFUSCATED or PRETTY (defaults to OBFUSCATED)

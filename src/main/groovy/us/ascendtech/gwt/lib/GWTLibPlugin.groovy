@@ -28,6 +28,9 @@ class GWTLibPlugin implements Plugin<Project> {
             maven {
                 url 'https://repo.vertispan.com/gwt-snapshot/'
             }
+            maven {
+                url 'https://jitpack.io'
+            }
         }
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
@@ -37,9 +40,15 @@ class GWTLibPlugin implements Plugin<Project> {
             if (gwt.libs.contains("vue")) {
                 deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0-beta-9"))
+                deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("autorest")) {
                 deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-gwt:0.9"))
+                deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
+            }
+            if (gwt.libs.contains("ast-highcharts")) {
+                deps.add(project.dependencies.create('com.github.ascendtech:gwt-highcharts:1.0'))
+                deps.add(project.dependencies.create('com.github.ascendtech:gwt-highcharts:1.0:sources'))
             }
             if (gwt.libs.contains("elemento-core")) {
                 if (gwt.includeGwtUser) {
@@ -62,7 +71,6 @@ class GWTLibPlugin implements Plugin<Project> {
             if (gwt.libs.contains("autorest")) {
                 deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-processor:0.9"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
-                deps.add(project.dependencies.create("com.google.gwt:gwt:HEAD-SNAPSHOT"))
             }
         }
 
