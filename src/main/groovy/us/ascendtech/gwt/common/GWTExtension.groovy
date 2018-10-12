@@ -13,6 +13,13 @@ class GWTExtension {
     //list of modules to compile or run
     Collection<String> modules = []
 
+    //list of libs to include
+    // current options "vue", "autorest", "elemento-core"
+    // vue is 1.0-beta-9
+    // autorest is 0.9
+    // elemento-core is 0.8.7 or 0.8.7-gwt2 depending on the includeGwtUser flag
+    Collection<String> libs = []
+
     //Script output style: DETAILED, OBFUSCATED or PRETTY (defaults to OBFUSCATED)
     String style = "OBFUSCATED"
 
