@@ -38,7 +38,7 @@ class GWTModernPlugin implements Plugin<Project> {
 
         def gwtConf = project.configurations.create("gwt")
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.github.tbroyer", "gwt-devserver", "1.0-SNAPSHOT"))
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("net.ltgt.gwt", "gwt-devserver", "1.0-SNAPSHOT"))
 
         final File gwtExtraDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "extras")
         final File gwtOutputDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "war")
