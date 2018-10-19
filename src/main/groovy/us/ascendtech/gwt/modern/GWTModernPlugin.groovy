@@ -32,15 +32,13 @@ class GWTModernPlugin implements Plugin<Project> {
 
         project.repositories {
             maven {
-                url 'https://jitpack.io'
+                url 'https://raw.githubusercontent.com/ascendtech/mvn-repo/master/repository/'
             }
         }
 
         def gwtConf = project.configurations.create("gwt")
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.eclipse.jetty", "jetty-proxy", "9.2.14.v20151106"))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.github.tbroyer", "gwt-devserver", "-SNAPSHOT"))
-
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.github.tbroyer", "gwt-devserver", "1.0-SNAPSHOT"))
 
         final File gwtExtraDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "extras")
         final File gwtOutputDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "war")
