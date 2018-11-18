@@ -20,13 +20,7 @@ class GWTLibPlugin implements Plugin<Project> {
 
         project.repositories {
             maven {
-                url 'https://raw.githubusercontent.com/intendia-oss/rxjava-gwt/mvn-repo/'
-            }
-            maven {
-                url 'https://oss.sonatype.org/content/repositories/google-snapshots/'
-            }
-            maven {
-                url 'https://repo.vertispan.com/gwt-snapshot/'
+                url 'https://maven.ascend-tech.us/repo'
             }
             maven {
                 url 'https://jitpack.io'

@@ -29,13 +29,6 @@ class GWTModernPlugin implements Plugin<Project> {
         def gwt = project.extensions.findByType(GWTExtension)
         def npm = project.extensions.findByType(NpmExtension)
 
-
-        project.repositories {
-            maven {
-                url 'https://raw.githubusercontent.com/ascendtech/mvn-repo/master/repository/'
-            }
-        }
-
         def gwtConf = project.configurations.create("gwt")
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion))
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("net.ltgt.gwt", "gwt-devserver", "1.0-SNAPSHOT"))
