@@ -25,7 +25,7 @@ class NpmUtil {
         File bin
 
         final String platform
-        final String arch
+
         final String ext
 
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -47,9 +47,11 @@ class NpmUtil {
             throw new UnsupportedOperationException("Platform not supported")
         }
 
-	arch = "x64"; // default x64
+        final String arch
         if (Os.isArch("x86")) {
             arch = "x86"
+        } else {
+            arch = "x64"
         }
 
         if (!target.exists()) {

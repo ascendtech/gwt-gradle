@@ -25,7 +25,7 @@ class GWTClassicPlugin implements Plugin<Project> {
         def gwt = project.extensions.findByType(GWTExtension)
 
         def gwtConf = project.configurations.create("gwt")
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion))
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("com.google.gwt", "gwt-dev", (String) gwt.gwtVersion));
 
 
         def runtimeOnly = project.configurations.getByName(JavaPlugin.RUNTIME_ONLY_CONFIGURATION_NAME)
