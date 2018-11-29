@@ -5,6 +5,7 @@ plugins {
 }
 
 
+version = "0.3.5.1"
 
 repositories {
     mavenCentral()
@@ -50,34 +51,30 @@ pluginBundle {
             displayName = "NPM/Webpack plugin"
             description = "Plugin for npm and webpack support in gradle"
             tags = listOf("webpack", "npm")
-            version = "0.3.5"
+
         }
         "gwtModernPlugin" {
             id = "us.ascendtech.gwt.modern"
             displayName = "Modern GWT plugin"
             description = "Plugin for modern GWT projects based on webpack"
             tags = listOf("gwt", "webpack", "npm")
-            version = "0.3.5"
+
         }
         "gwtClassicPlugin" {
             id = "us.ascendtech.gwt.classic"
             displayName = "Classic GWT plugin"
             description = "Plugin for classic GWT projects"
             tags = listOf("gwt")
-            version = "0.3.5"
+
         }
         "gwtLibPlugin" {
             id = "us.ascendtech.gwt.lib"
             displayName = "GWT Lib plugin"
             description = "Plugin for gwt lib projects"
             tags = listOf("gwt")
-            version = "0.3.5"
+
         }
     }
 
-    mavenCoordinates {
-        groupId = "us.ascendtech"
-        version = "0.3.5"
-    }
 
 }
