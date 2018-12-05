@@ -22,9 +22,6 @@ class GWTLibPlugin implements Plugin<Project> {
             maven {
                 url 'https://maven.ascend-tech.us/repo'
             }
-            maven {
-                url 'https://jitpack.io'
-            }
         }
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
@@ -41,14 +38,14 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("ast-highcharts")) {
-                deps.add(project.dependencies.create('com.github.ascendtech:gwt-highcharts:1.0'))
-                deps.add(project.dependencies.create('com.github.ascendtech:gwt-highcharts:1.0:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.0'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.0:sources'))
             }
             if (gwt.libs.contains("elemento-core")) {
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.8.7-gwt2"))
+                    deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.0-gwt2"))
                 } else {
-                    deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.8.7"))
+                    deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.0"))
                 }
             }
             if (gwt.includeGwtUser) {
