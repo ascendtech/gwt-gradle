@@ -46,6 +46,9 @@ abstract class GWTBaseTask extends JavaExec {
                     classpath += p.files(s)
                 }
                 classpath += p.files("build/generated/source/apt/main")
+
+                def libGwt = p.extensions.findByType(GWTExtension)
+                logger.info(p.name + " has libs " + libGwt.libs)
             }
         }
 
