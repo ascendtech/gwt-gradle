@@ -27,21 +27,12 @@ class GWTLibPlugin implements Plugin<Project> {
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
 
-        def allProjects = [] as LinkedHashSet<Project>
-        GWTBaseTask.collectDependedUponProjects(project, allProjects, "compile")
-        allProjects.each { p ->
-            if (p.configurations.find { it.name == 'gwtLib' }) {
-                def libGwt = p.extensions.findByType(GWTExtension)
-                project.logger.warn("Dependent project " + p.name + " has libs " + libGwt.libs)
 
-                gwt.libs.addAll(libGwt.libs)
-            }
-        }
-
-        project.logger.warn("Project has total libs " + gwt.libs)
 
 
         compileOnlyConfiguration.defaultDependencies { deps ->
+            addDependentProjectLibs(project, gwt)
+
             if (gwt.libs.contains("vue")) {
                 deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0-beta-9"))
@@ -74,6 +65,7 @@ class GWTLibPlugin implements Plugin<Project> {
 
         def annotationConfiguration = project.configurations.getByName(JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME)
         annotationConfiguration.defaultDependencies { deps ->
+            addDependentProjectLibs(project, gwt)
             if (gwt.libs.contains("vue")) {
                 deps.add(project.dependencies.create("com.axellience:vue-gwt-processors:1.0-beta-9"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
@@ -106,6 +98,21 @@ class GWTLibPlugin implements Plugin<Project> {
         project.configurations.create("gwtLib")
 
 
+    }
+
+    private void addDependentProjectLibs(Project project, GWTExtension gwt) {
+        def allProjects = [] as LinkedHashSet<Project>
+        GWTBaseTask.collectDependedUponProjects(project, allProjects, "compile")
+        allProjects.each { p ->
+            if (p.configurations.find { it.name == 'gwtLib' }) {
+                def libGwt = p.extensions.findByType(GWTExtension)
+                project.logger.warn("Dependent project " + p.name + " has libs " + libGwt.libs)
+
+                gwt.libs.addAll(libGwt.libs)
+            }
+        }
+
+        project.logger.warn("Project " + project.name + " has libs " + gwt.libs)
     }
 
 }
