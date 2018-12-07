@@ -108,7 +108,13 @@ class GWTLibPlugin implements Plugin<Project> {
                 def libGwt = p.extensions.findByType(GWTExtension)
                 project.logger.warn("Dependent project " + p.name + " has libs " + libGwt.libs)
 
-                gwt.libs.addAll(libGwt.libs)
+
+                libGwt.libs.forEach({
+                    if (!gwt.libs.contains(it)) {
+                        gwt.libs.add(it)
+                    }
+                })
+
             }
         }
 
