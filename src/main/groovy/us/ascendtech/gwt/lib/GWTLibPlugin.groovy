@@ -3,6 +3,7 @@ package us.ascendtech.gwt.lib
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
+import us.ascendtech.gwt.common.GWTBaseTask
 import us.ascendtech.gwt.common.GWTExtension
 
 /**
@@ -25,6 +26,19 @@ class GWTLibPlugin implements Plugin<Project> {
         }
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
+
+        def allProjects = [] as LinkedHashSet<Project>
+        GWTBaseTask.collectDependedUponProjects(project, allProjects, "compile")
+        allProjects.each { p ->
+            if (p.configurations.find { it.name == 'gwtLib' }) {
+                def libGwt = p.extensions.findByType(GWTExtension)
+                project.logger.warn("Dependent project " + p.name + " has libs " + libGwt.libs)
+
+                gwt.libs.addAll(libGwt.libs)
+            }
+        }
+
+        project.logger.warn("Project has total libs " + gwt.libs)
 
 
         compileOnlyConfiguration.defaultDependencies { deps ->

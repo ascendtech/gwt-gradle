@@ -14,7 +14,7 @@ abstract class GWTBaseTask extends JavaExec {
 
     @Override
     void exec() {
-        def gwt = project.extensions.gwt
+        def gwt = (GWTExtension) project.extensions.gwt
 
         def allProjects = [] as LinkedHashSet<Project>
         collectDependedUponProjects(project, allProjects, "compile")
@@ -46,9 +46,6 @@ abstract class GWTBaseTask extends JavaExec {
                     classpath += p.files(s)
                 }
                 classpath += p.files("build/generated/source/apt/main")
-
-                def libGwt = p.extensions.findByType(GWTExtension)
-                logger.info(p.name + " has libs " + libGwt.libs)
             }
         }
 
@@ -57,7 +54,7 @@ abstract class GWTBaseTask extends JavaExec {
 
     protected abstract List<String> getGWTBaseArgs(gwt)
 
-    private static void collectDependedUponProjects(Project project, LinkedHashSet result, String type) {
+    public static void collectDependedUponProjects(Project project, LinkedHashSet result, String type) {
         def config = project.configurations.findByName(type)
         if (config) {
             def projectDeps = config.allDependencies.withType(ProjectDependency)
