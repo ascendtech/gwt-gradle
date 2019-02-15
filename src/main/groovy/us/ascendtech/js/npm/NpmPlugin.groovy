@@ -56,7 +56,7 @@ class NpmPlugin implements Plugin<Project> {
 
         project.tasks.create(name: "webpackDev", type: NpmTask, dependsOn: "npmInstall") {
             baseCmd = "webpack-dev-server"
-            baseArgs = ["--mode development", "--content-base", "${npm.contentBase}"]
+            baseArgs = ["--mode=development", "--content-base", "${npm.contentBase}"]
         }
 
     }

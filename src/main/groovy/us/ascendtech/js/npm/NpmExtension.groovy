@@ -14,7 +14,7 @@ class NpmExtension {
     }
 
     //version of node js to download and use
-    String nodeJsVersion = "10.14.1"
+    String nodeJsVersion = "10.15.1"
 
     //this is where additional content is served from in webpack dev mode
     String contentBase = "./src/main/webapp/public/"
