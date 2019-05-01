@@ -35,6 +35,8 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
+
+                project.tasks.compileJava.outputs.upToDateWhen { false }
             }
             if (gwt.libs.contains("autorest")) {
                 deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-gwt:0.9"))
