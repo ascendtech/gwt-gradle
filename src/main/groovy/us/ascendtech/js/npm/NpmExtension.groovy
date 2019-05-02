@@ -25,4 +25,10 @@ class NpmExtension {
     //this is set to build/js and is not configurable currently
     String webpackOutputBase = ""
 
+    //dependencies to be saved
+    Collection<String> dependencies = []
+
+    //dev dependencies to be saved
+    Collection<String> devDependencies = []
+
 }

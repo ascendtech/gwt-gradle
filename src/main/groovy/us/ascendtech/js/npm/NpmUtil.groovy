@@ -8,6 +8,7 @@ import org.codehaus.plexus.archiver.tar.TarXZUnArchiver
 import org.codehaus.plexus.archiver.zip.ZipUnArchiver
 import org.codehaus.plexus.logging.Logger
 import org.codehaus.plexus.logging.console.ConsoleLogger
+import org.gradle.api.Project
 
 /**
  * @author Matt Davis
@@ -120,6 +121,32 @@ class NpmUtil {
 
     File getBin() {
         return this.bin
+    }
+
+    ArrayList<String> buildCommandLine(final Project project, final String baseCmd, final String[] baseArgs, final String npmModule, final String[] argsSuffix) {
+        final commandLine = new ArrayList<String>()
+
+        def nodeModulesDir = project.file("node_modules")
+
+        final String exec = resolveCommand(nodeModulesDir, baseCmd)
+        if (exec == null) {
+            throw new RuntimeException((String) "Cannot find " + baseCmd + ".  Is it npm installed?")
+        }
+
+        commandLine.add(exec)
+
+        if (baseArgs != null) {
+            commandLine.addAll(baseArgs)
+        }
+
+        if (npmModule != null) {
+            commandLine.addAll(npmModule.split())
+        }
+
+        if (argsSuffix != null) {
+            commandLine.addAll(argsSuffix)
+        }
+        return commandLine
     }
 
     File resolveModule(final String module) {

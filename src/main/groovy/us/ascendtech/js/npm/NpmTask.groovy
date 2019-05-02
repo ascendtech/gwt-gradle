@@ -1,5 +1,6 @@
 package us.ascendtech.js.npm
 
+
 import org.gradle.api.tasks.AbstractExecTask
 import org.gradle.api.tasks.options.Option
 
@@ -13,8 +14,8 @@ import javax.inject.Inject
 class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
     def baseCmd = ""
-    def baseArgs = []
-    def argsSuffix = []
+    String[] baseArgs = []
+    String[] argsSuffix = []
     def npmModule = ""
 
 
@@ -36,28 +37,8 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
     protected void exec() {
         final NpmUtil nodeUtil = NpmUtil.getInstance(this.project.npm.nodeJsVersion)
 
-        final commandLine = new ArrayList<String>()
 
-        def nodeModulesDir = project.file("node_modules");
-
-        final String exec = nodeUtil.resolveCommand(nodeModulesDir, baseCmd)
-        if (exec == null) {
-            throw new RuntimeException((String) "Cannot find " + baseCmd + ".  Is it npm installed?")
-        }
-
-        commandLine.add(exec)
-
-        if (baseArgs != null) {
-            commandLine.addAll(baseArgs)
-        }
-
-        if (npmModule != null) {
-            commandLine.addAll(npmModule.split())
-        }
-
-        if (argsSuffix != null) {
-            commandLine.addAll(argsSuffix)
-        }
+        ArrayList<String> commandLine = nodeUtil.buildCommandLine(project, baseCmd, baseArgs, npmModule, argsSuffix)
 
         println "Adding to path ${nodeUtil.bin.absolutePath}"
 
@@ -71,5 +52,6 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
             throw new RuntimeException("Error running ${commandLine.join(" ")}", ex)
         }
     }
+
 
 }
