@@ -27,8 +27,6 @@ class GWTLibPlugin implements Plugin<Project> {
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
 
-        project.tasks.compileJava.outputs.upToDateWhen { false }
-        project.logger.warn("Forcing full recompile use --build-cache -t compileJava for continuous build")
 
         compileOnlyConfiguration.defaultDependencies { deps ->
             addDependentProjectLibs(project, gwt)
@@ -37,10 +35,25 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0-beta-9"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
+
+                project.tasks.compileJava.outputs.upToDateWhen { false }
             }
             if (gwt.libs.contains("autorest")) {
                 deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-gwt:0.9"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
+            }
+            if (gwt.libs.contains("ast-aggrid")) {
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.3'))
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.3:sources'))
+            }
+            if (gwt.libs.contains("ast-momentjs")) {
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.9'))
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.9:sources'))
+                if (gwt.includeGwtUser) {
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.9'))
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.9:sources'))
+                }
+
             }
             if (gwt.libs.contains("ast-highcharts")) {
                 deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.0'))
