@@ -41,7 +41,7 @@ class NpmPlugin implements Plugin<Project> {
             doLast {
                 println "Verifying install for gradle npm dependencies: $npm.dependencies"
                 for (String dep : npm.dependencies) {
-                    int status = installNpmModule(npm, project, dep, new String[0])
+                    int status = installNpmModule(npm, project, dep, (String[]) ["--save"])
                     if (status != 0) {
                         throw new GradleException("Failed to install gradle npm dependency " + dep)
                     }
