@@ -27,8 +27,8 @@ class GWTLibPlugin implements Plugin<Project> {
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
 
-
-
+        project.tasks.compileJava.outputs.upToDateWhen { false }
+        project.logger.warn("Forcing full recompile use --build-cache -t compileJava for continuous build")
 
         compileOnlyConfiguration.defaultDependencies { deps ->
             addDependentProjectLibs(project, gwt)
