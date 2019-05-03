@@ -6,9 +6,8 @@ package us.ascendtech.gwt.common
  */
 class GWTExtension {
 
-    //2.8.2-rx1 is for rx-java, can be removed after next gwt 2.8.x that contains the patch to
-    //JDT (https://bugs.eclipse.org/bugs/show_bug.cgi?id=521438)
-    String gwtVersion = "2.8.2-rx1"
+    //default version is really GWT head as of May 1st, 2019 with java 11 source level support
+    String gwtVersion = "2.8.3-j11"
 
     //list of modules to compile or run
     Collection<String> modules = []
