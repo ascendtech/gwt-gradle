@@ -83,8 +83,9 @@ class NpmPlugin implements Plugin<Project> {
 
         }
 
-        final cleanTask = project.tasks.findByPath("clean")
-        cleanTask.dependsOn("npmClean")
+
+        //final cleanTask = project.tasks.findByPath("clean")
+        //cleanTask.dependsOn("npmClean")
 
         project.task("npmInstall", type: NpmTask) {
             baseCmd = "npm"
