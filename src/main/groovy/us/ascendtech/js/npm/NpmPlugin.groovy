@@ -39,8 +39,17 @@ class NpmPlugin implements Plugin<Project> {
         project.task("npmInstallDep", type: DefaultTask, dependsOn: ["classes"]) {
 
             doLast {
-                println "Verifying install for gradle npm dependencies: $npm.dependencies"
-                for (String dep : npm.dependencies) {
+
+                println "Found gradle npm dependencies: $npm.dependencies for project $project.name"
+                File f = new File(project.file("node_modules").absolutePath + File.separator + "gradleNpmDep.txt")
+                Set<String> newDeps = new LinkedHashSet<>(npm.dependencies)
+                newDeps.removeAll(f.exists() ? f.readLines() : Collections.emptyList())
+
+                if (!newDeps.isEmpty()) {
+                    println "Found new gradle npm dependencies: $newDeps"
+                }
+
+                for (String dep : newDeps) {
                     int status = installNpmModule(npm, project, dep, (String[]) ["--save"])
                     if (status != 0) {
                         throw new GradleException("Failed to install gradle npm dependency " + dep)
@@ -48,13 +57,26 @@ class NpmPlugin implements Plugin<Project> {
 
                 }
 
-                println "Verifying install for gradle npm  dev dependencies: $npm.devDependencies"
-                for (String dep : npm.devDependencies) {
+                f.write(npm.dependencies.join(System.lineSeparator()))
+
+                println "Found gradle npm dev dependencies: $npm.devDependencies for project $project.name"
+                f = new File(project.file("node_modules").absolutePath + File.separator + "gradleNpmDevDep.txt")
+                newDeps = new LinkedHashSet<>(npm.devDependencies)
+                newDeps.removeAll(f.exists() ? f.readLines() : Collections.emptyList())
+
+                if (!newDeps.isEmpty()) {
+                    println "Found new gradle npm dev dependencies: $newDeps"
+                }
+
+                for (String dep : newDeps) {
                     int status = installNpmModule(npm, project, dep, (String[]) ["--save-dev"])
                     if (status != 0) {
-                        throw new GradleException("Failed to install gradle npm dev dependency" + dep)
+                        throw new GradleException("Failed to install gradle npm dev dependency " + dep)
                     }
+
                 }
+
+                f.write(npm.devDependencies.join(System.lineSeparator()))
 
             }
 
