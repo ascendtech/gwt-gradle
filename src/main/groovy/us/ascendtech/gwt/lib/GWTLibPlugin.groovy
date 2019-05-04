@@ -28,6 +28,7 @@ class GWTLibPlugin implements Plugin<Project> {
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
 
         compileOnlyConfiguration.defaultDependencies { deps ->
+            println "Using gwt version " + gwt.gwtVersion
             addDependentProjectLibs(project, gwt)
 
             if (gwt.libs.contains("vue")) {
