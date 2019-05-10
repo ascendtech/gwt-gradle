@@ -36,7 +36,7 @@ class NpmPlugin implements Plugin<Project> {
             }
         }
 
-        project.task("npmInstallDep", type: DefaultTask, dependsOn: ["classes"]) {
+        project.task("npmInstallDep", type: DefaultTask, dependsOn: ["configurations.compile"]) {
 
             doLast {
 
