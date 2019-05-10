@@ -26,6 +26,10 @@ class NpmPlugin implements Plugin<Project> {
             println npm.dependencies
         }
 
+        project.configurations {
+            compile
+        }
+
         project.task("npmClean", type: DefaultTask) {
             doLast {
 
@@ -36,7 +40,7 @@ class NpmPlugin implements Plugin<Project> {
             }
         }
 
-        project.task("npmInstallDep", type: DefaultTask, dependsOn: ["configurations.compile"]) {
+        project.task("npmInstallDep", type: DefaultTask, dependsOn: project.configurations.compile) {
 
             doLast {
 
