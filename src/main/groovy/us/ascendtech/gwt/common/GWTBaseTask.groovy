@@ -33,6 +33,8 @@ abstract class GWTBaseTask extends JavaExec {
         logger.warn("GWT Args: " + gwtCompileArgs)
         args = gwtCompileArgs
 
+        systemProperty("gwt.watchFileChanges", "false")
+
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
         def runtimeOnlyConfiguration = project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
