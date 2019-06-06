@@ -110,6 +110,11 @@ Create war
 gradle war #war file in build/libs
 ```
 
+Run gwt devmode
+```
+gradlew gwtDev
+```
+
 # npm-gradle 
 A plugin that downloads and runs NPM and webpack.  Based on the work of https://github.com/solugo/gradle-nodejs-plugin.  NodeJS is downloaded to ~/.nodejs/version/.
 
