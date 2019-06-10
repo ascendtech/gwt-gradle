@@ -2,7 +2,7 @@
 See below for npm plugin
 
 # gwt.modern
-A plugin for GWT 2.8.x projects using webpack and npm.  Aims to be ready for GWT 3.x. Compiles to archive file for deploy on web server.
+A plugin for GWT 2.8.x projects using webpack and npm.  Evnentually will support J2CL / GWT 3.x. Compiles to archive file for deploy on web server.
 
 Work in progess examples can be found https://github.com/ascendtech/gwt-examples
 
