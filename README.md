@@ -128,7 +128,7 @@ plugins {
 
 //all optional, defaults shown
 npm {
-   nodeJsVersion = "10.4.0"
+   nodeJsVersion = "12.1.0"
    webpackInputBase = "./src/main/webapp/"
    contentBase = "./src/main/webapp/public/"
 }
