@@ -59,7 +59,7 @@ gradlew webpackDev
 
 #if using annotation processing (autorest or vue-gwt)
 #new terminal
-gradle compileJava -t
+gradle compileJava —build-cache -t compileJava
 ```
 
 
