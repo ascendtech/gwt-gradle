@@ -2,7 +2,7 @@
 See below for npm plugin
 
 # gwt.modern
-A plugin for GWT 2.8.x projects using webpack and npm.  Aims to be ready for GWT 3.x. Compiles to archive file for deploy on web server.
+A plugin for GWT 2.8.x projects using webpack and npm.  Evnentually will support J2CL / GWT 3.x. Compiles to archive file for deploy on web server.
 
 Work in progess examples can be found https://github.com/ascendtech/gwt-examples
 
@@ -13,7 +13,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.3.22"
+  id "us.ascendtech.gwt.modern" version "0.4.12"
 }
 
 gwt {
@@ -27,12 +27,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.3.22"
+    id "us.ascendtech.gwt.lib" version "0.4.12"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.3.22"
+  id "us.ascendtech.gwt.modern" version "0.4.12"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -59,7 +59,7 @@ gradlew webpackDev
 
 #if using annotation processing (autorest or vue-gwt)
 #new terminal
-gradle compileJava -t
+gradle compileJava —build-cache -t compileJava
 ```
 
 
@@ -74,7 +74,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.3.22"
+  id "us.ascendtech.gwt.classic" version "0.4.12"
 }
 
 gwt {
@@ -88,12 +88,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.3.22"
+    id "us.ascendtech.gwt.lib" version "0.4.12"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.3.22"
+  id "us.ascendtech.gwt.classic" version "0.4.12"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -123,12 +123,12 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.3.22"
+    id "us.ascendtech.js.npm" version "0.4.12"
 }
 
 //all optional, defaults shown
 npm {
-   nodeJsVersion = "10.4.0"
+   nodeJsVersion = "12.1.0"
    webpackInputBase = "./src/main/webapp/"
    contentBase = "./src/main/webapp/public/"
 }
