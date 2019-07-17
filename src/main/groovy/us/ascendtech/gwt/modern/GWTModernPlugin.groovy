@@ -22,8 +22,8 @@ class GWTModernPlugin implements Plugin<Project> {
 
     @Override
     void apply(final Project project) {
-        project.pluginManager.apply(NpmPlugin)
         project.getPluginManager().apply(JavaPlugin.class)
+        project.pluginManager.apply(NpmPlugin)
         project.getPluginManager().apply(GWTLibPlugin.class)
 
         def gwt = project.extensions.findByType(GWTExtension)
