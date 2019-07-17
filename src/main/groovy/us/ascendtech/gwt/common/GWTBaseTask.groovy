@@ -39,7 +39,12 @@ abstract class GWTBaseTask extends JavaExec {
         def runtimeOnlyConfiguration = project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
         def gwtConfiguration = project.configurations.getByName("gwt")
 
-        classpath = project.files(compileOnlyConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
+        if (project.sourceSets.main.output.hasProperty("generatedSourcesDir")) {
+            classpath = project.files(compileOnlyConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
+        } else {
+            classpath = project.files(compileOnlyConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs)
+        }
+
 
         allProjects.each { p ->
             if (p.configurations.find { it.name == 'gwtLib' }) {

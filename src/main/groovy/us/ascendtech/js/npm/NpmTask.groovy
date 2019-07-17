@@ -2,6 +2,7 @@ package us.ascendtech.js.npm
 
 
 import org.gradle.api.tasks.AbstractExecTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.options.Option
 
 import javax.inject.Inject
@@ -13,9 +14,13 @@ import javax.inject.Inject
  */
 class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
+    @Input
     def baseCmd = ""
+    @Input
     String[] baseArgs = []
+    @Input
     String[] argsSuffix = []
+    @Input
     def npmModule = ""
 
 
