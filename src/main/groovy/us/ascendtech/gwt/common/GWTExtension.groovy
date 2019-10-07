@@ -2,6 +2,7 @@ package us.ascendtech.gwt.common
 
 /**
  * @author Matt Davis
+ * @author Luc Girardin
  * Apache 2.0 License
  */
 class GWTExtension {
@@ -34,4 +35,10 @@ class GWTExtension {
 
     //include gwt user
     boolean includeGwtUser = true
+
+    //Produce "extra" directory
+    boolean extra = true
+
+    //Force recompilation
+    boolean forceRecompile = true
 }

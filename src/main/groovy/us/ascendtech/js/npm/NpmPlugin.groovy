@@ -23,7 +23,7 @@ class NpmPlugin implements Plugin<Project> {
         compileOnlyConfiguration.defaultDependencies { deps ->
             addDependentProjectLibs(project, npm)
 
-            println npm.dependencies
+            project.logger.info(npm.dependencies)
         }
 
         project.configurations {
@@ -34,7 +34,7 @@ class NpmPlugin implements Plugin<Project> {
             doLast {
 
 
-                println "Deleting node modules"
+                project.logger.info("Deleting node modules")
                 project.file("node_modules").deleteDir()
                 project.file("node_modules").mkdir()
             }
@@ -44,13 +44,13 @@ class NpmPlugin implements Plugin<Project> {
 
             doLast {
 
-                println "Found gradle npm dependencies: $npm.dependencies for project $project.name"
+                project.logger.info("Found gradle npm dependencies: $npm.dependencies for project $project.name")
                 File f = new File(project.file("node_modules").absolutePath + File.separator + "gradleNpmDep.txt")
                 Set<String> newDeps = new LinkedHashSet<>(npm.dependencies)
                 newDeps.removeAll(f.exists() ? f.readLines() : Collections.emptyList())
 
                 if (!newDeps.isEmpty()) {
-                    println "Found new gradle npm dependencies: $newDeps"
+                    project.logger.info("Found new gradle npm dependencies: $newDeps")
                 }
 
                 for (String dep : newDeps) {
@@ -63,13 +63,13 @@ class NpmPlugin implements Plugin<Project> {
 
                 f.write(npm.dependencies.join(System.lineSeparator()))
 
-                println "Found gradle npm dev dependencies: $npm.devDependencies for project $project.name"
+                project.logger.info("Found gradle npm dev dependencies: $npm.devDependencies for project $project.name")
                 f = new File(project.file("node_modules").absolutePath + File.separator + "gradleNpmDevDep.txt")
                 newDeps = new LinkedHashSet<>(npm.devDependencies)
                 newDeps.removeAll(f.exists() ? f.readLines() : Collections.emptyList())
 
                 if (!newDeps.isEmpty()) {
-                    println "Found new gradle npm dev dependencies: $newDeps"
+                    project.logger.info("Found new gradle npm dev dependencies: $newDeps")
                 }
 
                 for (String dep : newDeps) {
@@ -155,7 +155,7 @@ class NpmPlugin implements Plugin<Project> {
 
         def line
         while ((line = reader.readLine()) != null) {
-            println line
+            project.logger.info(line)
 
         }
 
@@ -168,8 +168,8 @@ class NpmPlugin implements Plugin<Project> {
         allProjects.each { p ->
             if (p.configurations.find { it.name == 'npm' }) {
                 def npmExt = p.extensions.findByType(NpmExtension)
-                project.logger.warn("Dependent project " + p.name + " has npm dependencies " + npmExt.dependencies)
-                project.logger.warn("Dependent project " + p.name + " has npm dev dependencies " + npmExt.devDependencies)
+                project.logger.info("Dependent project " + p.name + " has npm dependencies " + npmExt.dependencies)
+                project.logger.info("Dependent project " + p.name + " has npm dev dependencies " + npmExt.devDependencies)
 
 
                 npmExt.dependencies.forEach({
@@ -187,8 +187,8 @@ class NpmPlugin implements Plugin<Project> {
             }
         }
 
-        project.logger.warn("Project " + project.name + " has dependencies " + npm.dependencies)
-        project.logger.warn("Project " + project.name + " has dev dependencies " + npm.devDependencies)
+        project.logger.info("Project " + project.name + " has dependencies " + npm.dependencies)
+        project.logger.info("Project " + project.name + " has dev dependencies " + npm.devDependencies)
     }
 }
 

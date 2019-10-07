@@ -44,6 +44,9 @@ class GWTClassicPlugin implements Plugin<Project> {
             extraOutputDir = gwtExtraDir
             modules = gwt.modules
         }
+//        print "project.tasks.compileJava.outputs.upToDateWhen " + project.tasks.compileJava.outputs.upToDateWhen
+//        project.tasks.gwtCompile.outputs.upToDateWhen { project.tasks.compileJava.outputs.upToDateWhen }
+//        print "project.tasks.gwtCompile.outputs.upToDateWhen " + project.tasks.gwtCompile.outputs.upToDateWhen
 
         project.task("gwtDev", type: GWTClassicDevTask, dependsOn: "classes") {
             workDir = codeServerDir

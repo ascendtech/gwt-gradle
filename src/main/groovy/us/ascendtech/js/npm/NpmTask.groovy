@@ -45,13 +45,13 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
         ArrayList<String> commandLine = nodeUtil.buildCommandLine(project, baseCmd, baseArgs, npmModule, argsSuffix)
 
-        println "Adding to path ${nodeUtil.bin.absolutePath}"
+        project.logger.info("Adding to path ${nodeUtil.bin.absolutePath}")
 
         try {
             this.environment 'PATH', "${nodeUtil.bin.absolutePath}${File.pathSeparator}${environment.PATH}"
             this.environment 'Path', "${nodeUtil.bin.absolutePath}${File.pathSeparator}${environment.Path}"
             this.commandLine(commandLine)
-            println "Running " + commandLine
+            project.logger.info("Running " + commandLine)
             super.exec()
         } catch (Exception ex) {
             throw new RuntimeException("Error running ${commandLine.join(" ")}", ex)

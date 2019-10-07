@@ -8,6 +8,7 @@ import us.ascendtech.gwt.common.GWTExtension
 
 /**
  * @author Matt Davis
+ * @author Luc Girardin
  * Apache 2.0 License
  */
 class GWTLibPlugin implements Plugin<Project> {
@@ -28,7 +29,7 @@ class GWTLibPlugin implements Plugin<Project> {
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
 
         compileOnlyConfiguration.defaultDependencies { deps ->
-            println "Using gwt version " + gwt.gwtVersion
+            project.logger.info("Using gwt version " + gwt.gwtVersion)
             addDependentProjectLibs(project, gwt)
 
             if (gwt.libs.contains("vue")) {
@@ -95,18 +96,13 @@ class GWTLibPlugin implements Plugin<Project> {
             }
         }
 
-        project.configurations.all {
-            resolutionStrategy {
-                force "com.google.gwt:gwt:${gwt.gwtVersion}"
-            }
+        if (gwt.forceRecompile) {
+            project.tasks.compileJava.options.compilerArgs << '-parameters'
+            project.tasks.compileJava.dependsOn(project.tasks.processResources)
+            project.sourceSets.main.output.resourcesDir = "build/classes/java/main"
+            project.tasks.compileJava.outputs.upToDateWhen { false }
+            project.logger.info("Forcing full recompile use --build-cache -t compileJava for continuous build")
         }
-
-        project.tasks.compileJava.options.compilerArgs << '-parameters'
-        project.tasks.compileJava.dependsOn(project.tasks.processResources)
-        project.sourceSets.main.output.resourcesDir = "build/classes/java/main"
-        project.tasks.compileJava.outputs.upToDateWhen { false }
-        project.logger.info("Forcing full recompile use --build-cache -t compileJava for continuous build")
-
 
         project.configurations.create("gwtLib")
 
@@ -119,7 +115,7 @@ class GWTLibPlugin implements Plugin<Project> {
         allProjects.each { p ->
             if (p.configurations.find { it.name == 'gwtLib' }) {
                 def libGwt = p.extensions.findByType(GWTExtension)
-                project.logger.warn("Dependent project " + p.name + " has libs " + libGwt.libs)
+                project.logger.info("Dependent project " + p.name + " has libs " + libGwt.libs)
 
 
                 libGwt.libs.forEach({
@@ -131,7 +127,7 @@ class GWTLibPlugin implements Plugin<Project> {
             }
         }
 
-        project.logger.warn("Project " + project.name + " has libs " + gwt.libs)
+        project.logger.info("Project " + project.name + " has libs " + gwt.libs)
     }
 
 }

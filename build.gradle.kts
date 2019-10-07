@@ -9,7 +9,8 @@ plugins {
 
 configure<ReckonExtension> {
     scopeFromProp()
-    stageFromProp("rc", "final")
+    stageFromProp("rc", "final") // For distribution
+//    snapshotFromProp() // For local build
 }
 
 java {
@@ -47,6 +48,10 @@ gradlePlugin {
             id = "us.ascendtech.gwt.lib"
             implementationClass = "us.ascendtech.gwt.lib.GWTLibPlugin"
         }
+        create("gwtDepPlugin") {
+            id = "us.ascendtech.gwt.dep"
+            implementationClass = "us.ascendtech.gwt.dep.GWTDepPlugin"
+        }
     }
 }
 
@@ -81,6 +86,13 @@ pluginBundle {
             id = "us.ascendtech.gwt.lib"
             displayName = "GWT Lib plugin"
             description = "Plugin for gwt lib projects"
+            tags = listOf("gwt")
+
+        }
+        "gwtDepPlugin" {
+            id = "us.ascendtech.gwt.dep"
+            displayName = "GWT Dep plugin"
+            description = "Plugin for gwt dependencies projects"
             tags = listOf("gwt")
 
         }

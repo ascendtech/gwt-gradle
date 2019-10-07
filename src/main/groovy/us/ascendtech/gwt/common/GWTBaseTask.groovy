@@ -2,8 +2,10 @@ package us.ascendtech.gwt.common
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
+import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.StopActionException
 
@@ -11,6 +13,29 @@ abstract class GWTBaseTask extends JavaExec {
 
     @Input
     Collection<String> modules
+
+    /**
+     * Enumerate the list of directories containing source code and resources that should trigger recompilation when
+     * changed, i.e. these are the input to the GWT compiler
+     *
+     * @return the list of directories
+     */
+    @InputFiles
+    public getInputFiles() {
+        List<File> files = new ArrayList<>();
+
+        def allProjects = [] as LinkedHashSet<Project>
+        collectDependedUponProjects(project, allProjects, "compile")
+
+        for (Iterator iterator = allProjects.iterator(); iterator.hasNext();) {
+            def p  =  iterator.next();
+            for (File s : p.sourceSets.main.allSource.getSourceDirectories()) {
+                files += p.fileTree(s)
+            }
+        }
+
+        return files;
+    }
 
     @Override
     void exec() {
@@ -30,7 +55,7 @@ abstract class GWTBaseTask extends JavaExec {
             gwtCompileArgs += module
         }
 
-        logger.warn("GWT Args: " + gwtCompileArgs)
+        logger.info("GWT Args: " + gwtCompileArgs)
         args = gwtCompileArgs
 
         systemProperty("gwt.watchFileChanges", "false")
