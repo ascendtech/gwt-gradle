@@ -8,14 +8,11 @@ import org.gradle.api.tasks.OutputDirectory
  * Apache 2.0 License
  */
 class GWTCompileTask extends GWTBaseTask {
-
-
     @OutputDirectory
     File outputDir
 
     @OutputDirectory
     File extraOutputDir
-
 
     public GWTCompileTask() {
         main = "com.google.gwt.dev.Compiler"
@@ -35,9 +32,13 @@ class GWTCompileTask extends GWTBaseTask {
             gwtCompileArgs += "-extra"
             gwtCompileArgs += extraOutputDir.getAbsolutePath()
         }
+        if(gwt.incremental) {
+            gwtCompileArgs += "-incremental"
+        } else {
+            gwtCompileArgs += "-noincremental"
+        }
         gwtCompileArgs += "-war"
         gwtCompileArgs += outputDir.getAbsolutePath()
         return gwtCompileArgs
     }
-
 }

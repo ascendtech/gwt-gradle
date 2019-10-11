@@ -2,7 +2,6 @@ package us.ascendtech.gwt.common
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
-import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
@@ -10,7 +9,6 @@ import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.StopActionException
 
 abstract class GWTBaseTask extends JavaExec {
-
     @Input
     Collection<String> modules
 
@@ -33,6 +31,8 @@ abstract class GWTBaseTask extends JavaExec {
                 files += p.fileTree(s)
             }
         }
+
+        files += project.sourceSets.main.java.srcDirs
 
         return files;
     }
@@ -58,6 +58,9 @@ abstract class GWTBaseTask extends JavaExec {
         logger.info("GWT Args: " + gwtCompileArgs)
         args = gwtCompileArgs
 
+        if(!gwt.persistentunitcache) {
+            systemProperty("gwt.persistentunitcache", "false")
+        }
         systemProperty("gwt.watchFileChanges", "false")
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
