@@ -23,7 +23,7 @@ class NpmPlugin implements Plugin<Project> {
         compileOnlyConfiguration.defaultDependencies { deps ->
             addDependentProjectLibs(project, npm)
 
-            project.logger.info(npm.dependencies)
+            project.logger.info("gradle npm dependencies: " + npm.dependencies)
         }
 
         project.configurations {
