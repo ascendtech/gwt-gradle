@@ -24,10 +24,10 @@ repositories {
 
 
 dependencies {
-    compile(gradleApi())
-    compile("org.codehaus.plexus:plexus-archiver:3.5")
-    compile("org.codehaus.plexus:plexus-container-default:1.7.1")
-    testCompile(gradleTestKit())
+    implementation(gradleApi())
+    implementation("org.codehaus.plexus:plexus-archiver:3.5")
+    implementation("org.codehaus.plexus:plexus-container-default:1.7.1")
+    testCompileOnly(gradleTestKit())
 }
 
 gradlePlugin {
