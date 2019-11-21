@@ -52,7 +52,7 @@ class GWTModernPlugin implements Plugin<Project> {
 
         project.task("gwtArchive", type: Tar, dependsOn: "gwtCompile") {
             compression = Compression.GZIP
-            destinationDir = project.file(project.getBuildDir().name + File.separator + "webapp")
+            destinationDirectory = project.file(project.getBuildDir().name + File.separator + "webapp")
             from gwtOutputDir
             from npm.contentBase
             from npm.webpackOutputBase
