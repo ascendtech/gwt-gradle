@@ -41,4 +41,7 @@ class GWTExtension {
 
     //Force recompilation
     boolean forceRecompile = true
+
+    boolean incremental = false
+    boolean persistentunitcache = true
 }
