@@ -2,6 +2,7 @@ package us.ascendtech.gwt.classic
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.WarPlugin
@@ -58,6 +59,7 @@ class GWTClassicPlugin implements Plugin<Project> {
             dependsOn 'gwtCompile'
             from "war"
             from gwtOutputDir
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
 
 

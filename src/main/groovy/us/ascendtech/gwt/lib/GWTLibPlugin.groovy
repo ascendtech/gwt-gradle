@@ -2,7 +2,9 @@ package us.ascendtech.gwt.lib
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.jvm.tasks.Jar
 import us.ascendtech.gwt.common.GWTBaseTask
 import us.ascendtech.gwt.common.GWTExtension
 
@@ -102,6 +104,10 @@ class GWTLibPlugin implements Plugin<Project> {
             project.sourceSets.main.output.resourcesDir = "build/classes/java/main"
             project.tasks.compileJava.outputs.upToDateWhen { false }
             project.logger.info("Forcing full recompile use --build-cache -t compileJava for continuous build")
+        }
+
+        project.tasks.withType(Jar) { Jar jarTask ->
+            jarTask.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
 
         project.configurations.create("gwtLib")
