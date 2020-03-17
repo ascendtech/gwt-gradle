@@ -75,11 +75,15 @@ abstract class GWTBaseTask extends JavaExec {
 
 
         allProjects.each { p ->
+            print(p.name);
             if (p.configurations.find { it.name == 'gwtLib' }) {
+                print("lib: " + p.name);
                 for (File s : p.sourceSets.main.allSource.getSourceDirectories()) {
                     classpath += p.files(s)
                 }
+
                 classpath += p.files("build/generated/sources/annotationProcessor/java/main")
+                classpath += p.files("build/generated/source/apt/main")
             }
         }
         logger.warn("Classpath: " + classpath);
