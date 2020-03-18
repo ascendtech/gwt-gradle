@@ -81,9 +81,10 @@ abstract class GWTBaseTask extends JavaExec {
                     classpath += p.files(s)
                 }
 
-                classpath += p.files("build/generated/sources/annotationProcessor/java/main")
+                classpath += p.sourceSets.main.annotationProcessorPath
             }
         }
+        classpath += project.sourceSets.main.annotationProcessorPath
         logger.warn("Classpath: " + classpath.toList());
 
         super.exec()
