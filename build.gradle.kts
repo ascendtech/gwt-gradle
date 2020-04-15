@@ -1,7 +1,7 @@
 import org.ajoberstar.reckon.gradle.ReckonExtension
 
 plugins {
-    id("com.gradle.plugin-publish") version "0.10.0"
+    id("com.gradle.plugin-publish") version "0.11.0"
     id("java-gradle-plugin")
     id("groovy")
     id("org.ajoberstar.reckon") version "0.9.0"
