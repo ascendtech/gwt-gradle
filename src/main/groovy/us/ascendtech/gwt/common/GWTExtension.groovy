@@ -7,8 +7,7 @@ package us.ascendtech.gwt.common
  */
 class GWTExtension {
 
-    //default version is really GWT head as of May 1st, 2019 with java 11 source level support
-    String gwtVersion = "2.8.3-j11"
+    String gwtVersion = "2.9.0-RC1"
 
     //list of modules to compile or run
     Collection<String> modules = []
