@@ -73,9 +73,14 @@ class GWTLibPlugin implements Plugin<Project> {
                 if (gwt.includeGwtUser) {
                     deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6-gwt2"))
                 } else {
-                    deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.0-rc3"))
+                    deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6"))
                 }
             }
+            if (gwt.libs.contains("elemento-core-1.0")) {
+                deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.0-rc3"))
+            }
+
+
             if (gwt.includeGwtUser) {
                 deps.add(project.dependencies.create("com.google.gwt:gwt-user:${gwt.gwtVersion}"))
             }
