@@ -25,9 +25,9 @@ class NpmUtil {
         File modules
         File bin
 
-        final String platform
+        String platform = "undef"
 
-        final String ext
+        String ext = "undef"
 
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             platform = "win"
