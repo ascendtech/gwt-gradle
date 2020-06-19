@@ -2,7 +2,7 @@
 See below for npm plugin
 
 # gwt.modern
-A plugin for GWT 2.8.x projects using webpack and npm.  Eventually will support J2CL / GWT 3.x. Compiles to archive file for deploy on web server.
+A plugin for GWT 2.9.x projects using webpack and npm.  Eventually will support J2CL / GWT 3.x. Compiles to archive file for deploy on web server.
 
 Work in progess examples can be found https://github.com/ascendtech/gwt-examples
 
@@ -13,7 +13,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.4.20"
+  id "us.ascendtech.gwt.modern" version "0.5.1"
 }
 
 gwt {
@@ -27,12 +27,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.4.20"
+    id "us.ascendtech.gwt.lib" version "0.5.1"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.4.20"
+  id "us.ascendtech.gwt.modern" version "0.5.1"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -74,7 +74,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.4.20"
+  id "us.ascendtech.gwt.classic" version "0.5.1"
 }
 
 gwt {
@@ -88,12 +88,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.4.20"
+    id "us.ascendtech.gwt.lib" version "0.5.1"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.4.20"
+  id "us.ascendtech.gwt.classic" version "0.5.1"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -123,7 +123,7 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.4.20"
+    id "us.ascendtech.js.npm" version "0.5.1"
 }
 
 //all optional, defaults shown
