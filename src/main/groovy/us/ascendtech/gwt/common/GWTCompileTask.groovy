@@ -37,6 +37,8 @@ class GWTCompileTask extends GWTBaseTask {
         } else {
             gwtCompileArgs += "-noincremental"
         }
+        gwtCompileArgs += "-sourceLevel"
+        gwtCompileArgs += gwt.sourceLevel
         gwtCompileArgs += "-war"
         gwtCompileArgs += outputDir.getAbsolutePath()
         return gwtCompileArgs
