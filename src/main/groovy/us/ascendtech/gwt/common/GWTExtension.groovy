@@ -41,6 +41,9 @@ class GWTExtension {
     //Force recompilation
     boolean forceRecompile = true
 
+    // Java version to use to compile the GWT code.
+    String sourceLevel = "1.8"
+
     boolean incremental = false
     boolean persistentunitcache = true
 }
