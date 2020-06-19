@@ -1,3 +1,5 @@
+Requires Java 11
+
 
 See below for npm plugin
 
