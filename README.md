@@ -22,6 +22,8 @@ gwt {
 
 ```
 
+Options for gwt {} can be found here: https://github.com/ascendtech/gwt-gradle/blob/master/src/main/groovy/us/ascendtech/gwt/common/GWTExtension.groovy
+
 gwt lib
 ```gradle
 
