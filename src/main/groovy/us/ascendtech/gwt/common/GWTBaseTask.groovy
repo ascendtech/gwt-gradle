@@ -42,7 +42,8 @@ abstract class GWTBaseTask extends JavaExec {
         def gwt = (GWTExtension) project.extensions.gwt
 
         def allProjects = [] as LinkedHashSet<Project>
-        collectDependedUponProjects(project, allProjects, "compile")
+        collectDependedUponProjects(project, allProjects, JavaPlugin.COMPILE_CONFIGURATION_NAME)
+        collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
 
         if (gwt.modules == null || gwt.modules.size == 0) {
             logger.warn("No GWT Modules defined for project " + project.name)
