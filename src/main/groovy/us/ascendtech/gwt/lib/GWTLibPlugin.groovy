@@ -48,25 +48,25 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("ast-aggrid")) {
-                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.9'))
-                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.9:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.10'))
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.1.10:sources'))
             }
             if (gwt.libs.contains("ast-momentjs")) {
-                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.10'))
-                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.10:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.11'))
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.11:sources'))
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.10'))
-                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.10:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.11'))
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.11:sources'))
                 }
 
             }
             if (gwt.libs.contains("ast-highcharts")) {
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.4'))
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.4:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.5'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.5:sources'))
 
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.1'))
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.1:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.5'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.5:sources'))
                 }
             }
             if (gwt.libs.contains("elemento-core")) {
