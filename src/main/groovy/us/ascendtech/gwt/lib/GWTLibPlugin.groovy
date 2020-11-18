@@ -69,14 +69,14 @@ class GWTLibPlugin implements Plugin<Project> {
                     deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.5:sources'))
                 }
             }
-            if (gwt.libs.contains("elemento-core")) {
+            if (gwt.libs.contains("elemento-core-legacy")) {
                 if (gwt.includeGwtUser) {
                     deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6-gwt2"))
                 } else {
                     deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6"))
                 }
             }
-            if (gwt.libs.contains("elemento-core-current")) {
+            if (gwt.libs.contains("elemento-core")) {
                 deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.2"))
             }
 
