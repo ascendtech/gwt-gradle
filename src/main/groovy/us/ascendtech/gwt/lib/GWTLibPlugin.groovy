@@ -76,8 +76,8 @@ class GWTLibPlugin implements Plugin<Project> {
                     deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6"))
                 }
             }
-            if (gwt.libs.contains("elemento-core-1.0")) {
-                deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.0-rc3"))
+            if (gwt.libs.contains("elemento-core-current")) {
+                deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.2"))
             }
 
 
