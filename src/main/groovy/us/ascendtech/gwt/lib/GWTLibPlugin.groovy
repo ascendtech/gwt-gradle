@@ -80,6 +80,26 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("org.jboss.elemento:elemento-core:1.0.2"))
             }
 
+            if (gwt.libs.contains("core")) {
+                deps.add(project.dependencies.create("org.gwtproject.core:gwt-core:1.0.0-RC1"))
+            }
+
+            if (gwt.libs.contains("event")) {
+                deps.add(project.dependencies.create("org.gwtproject.event:gwt-event:1.0.0-RC1"))
+            }
+
+            if (gwt.libs.contains("places")) {
+                deps.add(project.dependencies.create("org.gwtproject.places:gwt-places:1.0.0-RC1"))
+            }
+
+            if (gwt.libs.contains("history")) {
+                deps.add(project.dependencies.create("org.gwtproject.user.history:gwt-history:1.0.0-RC1"))
+            }
+
+            if (gwt.libs.contains("timer")) {
+                deps.add(project.dependencies.create("org.gwtproject.timer:gwt-timer:1.0.0-RC1"))
+            }
+
 
             if (gwt.includeGwtUser) {
                 deps.add(project.dependencies.create("com.google.gwt:gwt-user:${gwt.gwtVersion}"))
