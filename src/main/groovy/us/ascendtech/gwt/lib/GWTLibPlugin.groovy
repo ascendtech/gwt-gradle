@@ -26,10 +26,6 @@ class GWTLibPlugin implements Plugin<Project> {
             maven {
                 url 'https://maven.ascend-tech.us/repo'
             }
-            maven {
-                //temp for vue beta-10 snapshot
-                url 'https://oss.sonatype.org/content/repositories/snapshots'
-            }
         }
 
         def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
@@ -39,8 +35,8 @@ class GWTLibPlugin implements Plugin<Project> {
             addDependentProjectLibs(project, gwt)
 
             if (gwt.libs.contains("vue")) {
-                deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0-beta-10-SNAPSHOT"))
-                deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0-beta-10-SNAPSHOT"))
+                deps.add(project.dependencies.create("com.axellience:vue-gwt:1.0.1"))
+                deps.add(project.dependencies.create("com.axellience:vue-router-gwt:1.0.1"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("autorest")) {
