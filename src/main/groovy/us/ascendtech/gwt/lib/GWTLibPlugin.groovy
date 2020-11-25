@@ -57,12 +57,12 @@ class GWTLibPlugin implements Plugin<Project> {
 
             }
             if (gwt.libs.contains("ast-highcharts")) {
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.5'))
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.5:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.6'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.6:sources'))
 
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.5'))
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.5:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.6'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.6:sources'))
                 }
             }
             if (gwt.libs.contains("elemento-core-legacy")) {
