@@ -45,6 +45,7 @@ class GWTLibPlugin implements Plugin<Project> {
             }
             if (gwt.libs.contains("simplerest")) {
                 deps.add(project.dependencies.create("us.ascendtech:simplerest-core:0.2.0"))
+                deps.add(project.dependencies.create('us.ascendtech:simplerest-core:0.2.0:sources'))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("ast-aggrid")) {
