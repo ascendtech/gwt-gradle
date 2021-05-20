@@ -70,6 +70,11 @@ class GWTLibPlugin implements Plugin<Project> {
                     deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.15:sources'))
                 }
             }
+            if (gwt.libs.contains("ast-wordcloud")) {
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.0'))
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.0:sources'))
+            }
+
             if (gwt.libs.contains("elemento-core-legacy")) {
                 if (gwt.includeGwtUser) {
                     deps.add(project.dependencies.create("org.jboss.gwt.elemento:elemento-core:0.9.6-gwt2"))
