@@ -71,8 +71,8 @@ class GWTLibPlugin implements Plugin<Project> {
                 }
             }
             if (gwt.libs.contains("ast-wordcloud")) {
-                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.0'))
-                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.0:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.2'))
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.2:sources'))
             }
 
             if (gwt.libs.contains("elemento-core-legacy")) {
