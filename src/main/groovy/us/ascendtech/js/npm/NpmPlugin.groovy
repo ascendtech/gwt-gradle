@@ -155,8 +155,7 @@ class NpmPlugin implements Plugin<Project> {
 
         Process process = builder.start()
         InputStream stdout = process.getInputStream()
-        BufferedReader reader = new BufferedReader(new
-                InputStreamReader(stdout))
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stdout))
 
         def line
         while ((line = reader.readLine()) != null) {
@@ -169,7 +168,7 @@ class NpmPlugin implements Plugin<Project> {
 
     private void addDependentProjectLibs(Project project, NpmExtension npm) {
         def allProjects = [] as LinkedHashSet<Project>
-        GWTBaseTask.collectDependedUponProjects(project, allProjects, "compile")
+        GWTBaseTask.collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
         allProjects.each { p ->
             if (p.configurations.find { it.name == 'npm' }) {
                 def npmExt = p.extensions.findByType(NpmExtension)

@@ -23,7 +23,8 @@ abstract class GWTBaseTask extends JavaExec {
         List<File> files = new ArrayList<>();
 
         def allProjects = [] as LinkedHashSet<Project>
-        collectDependedUponProjects(project, allProjects, "compile")
+        collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
+        collectDependedUponProjects(project, allProjects, JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
 
         for (Iterator iterator = allProjects.iterator(); iterator.hasNext();) {
             def p  =  iterator.next();
@@ -42,7 +43,6 @@ abstract class GWTBaseTask extends JavaExec {
         def gwt = (GWTExtension) project.extensions.gwt
 
         def allProjects = [] as LinkedHashSet<Project>
-        collectDependedUponProjects(project, allProjects, JavaPlugin.COMPILE_CONFIGURATION_NAME)
         collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
         collectDependedUponProjects(project, allProjects, JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
 

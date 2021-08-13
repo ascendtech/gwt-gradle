@@ -156,7 +156,7 @@ class GWTLibPlugin implements Plugin<Project> {
 
     private void addDependentProjectLibs(Project project, GWTExtension gwt) {
         def allProjects = [] as LinkedHashSet<Project>
-        GWTBaseTask.collectDependedUponProjects(project, allProjects, "compile")
+        GWTBaseTask.collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
         allProjects.each { p ->
             if (p.configurations.find { it.name == 'gwtLib' }) {
                 def libGwt = p.extensions.findByType(GWTExtension)
