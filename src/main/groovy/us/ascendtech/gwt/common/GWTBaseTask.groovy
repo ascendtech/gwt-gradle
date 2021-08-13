@@ -65,14 +65,14 @@ abstract class GWTBaseTask extends JavaExec {
         }
         systemProperty("gwt.watchFileChanges", "false")
 
-        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME)
+        def implementationConfiguration = project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
         def runtimeOnlyConfiguration = project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
         def gwtConfiguration = project.configurations.getByName("gwt")
 
         if (project.sourceSets.main.output.hasProperty("generatedSourcesDir")) {
-            classpath = project.files(compileOnlyConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
+            classpath = project.files(implementationConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs, project.sourceSets.main.output.generatedSourcesDir)
         } else {
-            classpath = project.files(compileOnlyConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs)
+            classpath = project.files(implementationConfiguration, runtimeOnlyConfiguration, gwtConfiguration, project.sourceSets.main.java.srcDirs, project.sourceSets.main.resources.srcDirs, project.sourceSets.main.output.classesDirs)
         }
 
 
