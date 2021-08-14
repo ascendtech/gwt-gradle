@@ -19,8 +19,8 @@ class NpmPlugin implements Plugin<Project> {
         def npm = project.extensions.create("npm", NpmExtension, project)
 
 
-        def implementationConfig = project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
-        implementationConfig.defaultDependencies { deps ->
+        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME)
+        compileOnlyConfiguration.defaultDependencies { deps ->
             addDependentProjectLibs(project, npm)
 
             project.logger.info("gradle npm dependencies: " + npm.dependencies)

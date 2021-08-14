@@ -28,9 +28,9 @@ class GWTLibPlugin implements Plugin<Project> {
             }
         }
 
-        def implementationConfiguration = project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME)
+        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME)
 
-        implementationConfiguration.defaultDependencies { deps ->
+        compileOnlyConfiguration.defaultDependencies { deps ->
             project.logger.info("Using gwt version " + gwt.gwtVersion)
             addDependentProjectLibs(project, gwt)
 
