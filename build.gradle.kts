@@ -5,6 +5,7 @@ plugins {
     id("java-gradle-plugin")
     id("groovy")
     id("org.ajoberstar.reckon") version "0.13.0"
+    `maven-publish`
 }
 
 configure<ReckonExtension> {
@@ -22,6 +23,7 @@ repositories {
     mavenCentral()
 }
 
+group = "us.ascendtech.gwt.plugin"
 
 dependencies {
     implementation(gradleApi())
@@ -53,6 +55,7 @@ gradlePlugin {
             implementationClass = "us.ascendtech.gwt.dep.GWTDepPlugin"
         }
     }
+
 }
 
 
@@ -99,4 +102,13 @@ pluginBundle {
     }
 
 
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "localPluginRepository"
+            url = uri(project.gradle.gradleUserHomeDir.absolutePath + "/.m2/repository")
+        }
+    }
 }
