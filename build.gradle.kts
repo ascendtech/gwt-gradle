@@ -1,7 +1,7 @@
 import org.ajoberstar.reckon.gradle.ReckonExtension
 
 plugins {
-    id("com.gradle.plugin-publish") version "0.14.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
     id("java-gradle-plugin")
     id("groovy")
     id("org.ajoberstar.reckon") version "0.13.0"
@@ -23,7 +23,7 @@ repositories {
     mavenCentral()
 }
 
-group = "us.ascendtech.gwt.plugin"
+group = "us.ascendtech.gwt"
 
 dependencies {
     implementation(gradleApi())
