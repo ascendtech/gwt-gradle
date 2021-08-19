@@ -15,7 +15,7 @@ class GWTCompileTask extends GWTBaseTask {
     File extraOutputDir
 
     public GWTCompileTask() {
-        main = "com.google.gwt.dev.Compiler"
+        mainClass.set("com.google.gwt.dev.Compiler")
     }
 
     @Override

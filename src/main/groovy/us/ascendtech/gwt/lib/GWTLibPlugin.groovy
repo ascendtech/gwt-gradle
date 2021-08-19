@@ -3,6 +3,7 @@ package us.ascendtech.gwt.lib
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.jvm.tasks.Jar
 import us.ascendtech.gwt.common.GWTBaseTask
@@ -19,6 +20,7 @@ class GWTLibPlugin implements Plugin<Project> {
     @Override
     void apply(final Project project) {
         project.getPluginManager().apply(JavaPlugin.class)
+        project.getPluginManager().apply(JavaLibraryPlugin.class)
 
         def gwt = project.extensions.create("gwt", GWTExtension)
 
@@ -28,7 +30,7 @@ class GWTLibPlugin implements Plugin<Project> {
             }
         }
 
-        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME)
+        def compileOnlyConfiguration = project.configurations.getByName(JavaPlugin.COMPILE_ONLY_API_CONFIGURATION_NAME)
 
         compileOnlyConfiguration.defaultDependencies { deps ->
             project.logger.info("Using gwt version " + gwt.gwtVersion)

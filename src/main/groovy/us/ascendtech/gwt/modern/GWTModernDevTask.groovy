@@ -19,7 +19,7 @@ class GWTModernDevTask extends GWTBaseTask {
 
 
     public GWTModernDevTask() {
-        main = "net.ltgt.gwt.devserver.DevServer"
+        mainClass.set("net.ltgt.gwt.devserver.DevServer")
     }
 
     @Override
