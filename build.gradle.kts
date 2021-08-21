@@ -22,7 +22,7 @@ repositories {
     mavenCentral()
 }
 
-group = "us.ascendtech.gwt"
+//group = "us.ascendtech.gwt"
 
 dependencies {
     implementation(gradleApi())
