@@ -1,7 +1,7 @@
 Requires Java 11
 
 
-Use version 0.5.32 for Gradle 6.8 and version 0.7.0 for Gradle 7.x
+Use version 0.5.32 for Gradle 6.8 and version 0.7.1 for Gradle 7.x
 
 See below for npm plugin
 
@@ -17,7 +17,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.5.32"
+  id "us.ascendtech.gwt.modern" version "0.7.1"
 }
 
 gwt {
@@ -33,12 +33,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.5.32"
+    id "us.ascendtech.gwt.lib" version " 0.7.1"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.5.32"
+  id "us.ascendtech.gwt.modern" version "0.7.1"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -80,7 +80,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.5.32"
+  id "us.ascendtech.gwt.classic" version "0.7.1"
 }
 
 gwt {
@@ -94,12 +94,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.5.32"
+    id "us.ascendtech.gwt.lib" version "0.7.1"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.5.32"
+  id "us.ascendtech.gwt.classic" version "0.7.1"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -129,7 +129,7 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.5.32"
+    id "us.ascendtech.js.npm" version "0.7.1"
 }
 
 //all optional, defaults shown
