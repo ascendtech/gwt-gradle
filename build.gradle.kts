@@ -22,7 +22,7 @@ repositories {
     mavenCentral()
 }
 
-//group = "us.ascendtech.gwt"
+//group = "gradle.plugin.us.ascendtech"
 
 dependencies {
     implementation(gradleApi())
@@ -103,3 +103,13 @@ pluginBundle {
 
 }
 
+/*
+publishing {
+    repositories {
+        maven {
+            name = "localPluginRepository"
+            url = uri(project.gradle.gradleUserHomeDir.absolutePath + "/.m2/repository")
+        }
+    }
+}
+ */
