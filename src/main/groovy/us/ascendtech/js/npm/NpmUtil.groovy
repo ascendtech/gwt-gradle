@@ -6,6 +6,7 @@ import org.codehaus.plexus.archiver.UnArchiver
 import org.codehaus.plexus.archiver.tar.TarGZipUnArchiver
 import org.codehaus.plexus.archiver.tar.TarXZUnArchiver
 import org.codehaus.plexus.archiver.zip.ZipUnArchiver
+import org.codehaus.plexus.components.io.filemappers.FileMapper
 import org.codehaus.plexus.logging.Logger
 import org.codehaus.plexus.logging.console.ConsoleLogger
 import org.gradle.api.Project
@@ -194,62 +195,38 @@ class NpmUtil {
 
 
     private static class NodeJsTarXzUnArchiver extends TarXZUnArchiver {
-        @Override
-        protected void extractFile(
-                final File src,
-                final File dir,
-                final InputStream inputStream,
-                final String entryName,
-                final Date entryDate,
-                final boolean isDirectory,
-                final Integer mode,
-                final String symlinkDestination
-        ) throws IOException, ArchiverException {
 
+        @Override
+        protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1) {
                 super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
+
     }
 
     private static class NodeJsTarGzUnArchiver extends TarGZipUnArchiver {
-        @Override
-        protected void extractFile(
-                final File src,
-                final File dir,
-                final InputStream inputStream,
-                final String entryName,
-                final Date entryDate,
-                final boolean isDirectory,
-                final Integer mode,
-                final String symlinkDestination
-        ) throws IOException, ArchiverException {
 
+        @Override
+        protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1) {
                 super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
+
     }
 
     private static class NodeJsZipUnArchiver extends ZipUnArchiver {
-        @Override
-        protected void extractFile(
-                final File src,
-                final File dir,
-                final InputStream inputStream,
-                final String entryName,
-                final Date entryDate,
-                final boolean isDirectory,
-                final Integer mode,
-                final String symlinkDestination
-        ) throws IOException, ArchiverException {
 
+        @Override
+        protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1 && pos < entryName.length() - 1) {
                 super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
+
     }
 }
