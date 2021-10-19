@@ -200,7 +200,7 @@ class NpmUtil {
         protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1) {
-                super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
+                super.extractFile(srcF, dir, compressedInputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
 
@@ -212,7 +212,7 @@ class NpmUtil {
         protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1) {
-                super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
+                super.extractFile(srcF, dir, compressedInputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
 
@@ -224,7 +224,7 @@ class NpmUtil {
         protected void extractFile(File srcF, File dir, InputStream compressedInputStream, String entryName, Date entryDate, boolean isDirectory, Integer mode, String symlinkDestination, FileMapper[] fileMappers) throws IOException, ArchiverException {
             final pos = entryName.indexOf("/")
             if (pos != -1 && pos < entryName.length() - 1) {
-                super.extractFile(src, dir, inputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
+                super.extractFile(srcF, dir, compressedInputStream, entryName.substring(pos + 1), entryDate, isDirectory, mode, symlinkDestination)
             }
         }
 
