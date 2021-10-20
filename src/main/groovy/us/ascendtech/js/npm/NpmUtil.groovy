@@ -42,7 +42,7 @@ class NpmUtil {
             bin = new File(target, "bin")
         } else if (Os.isFamily(Os.FAMILY_UNIX)) {
             platform = "linux"
-            ext = "tar.xz"
+            ext = "tar.gz"
             modules = new File(target, "lib/node_modules")
             bin = new File(target, "bin")
         } else {
