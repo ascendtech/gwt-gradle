@@ -22,12 +22,10 @@ repositories {
     mavenCentral()
 }
 
-//group = "gradle.plugin.us.ascendtech"
-
 dependencies {
     implementation(gradleApi())
-    implementation("org.codehaus.plexus:plexus-archiver:4.2.1")
-    implementation("org.codehaus.plexus:plexus-container-default:2.1.0")
+    api("org.codehaus.plexus:plexus-archiver:4.2.5")
+    api("org.codehaus.plexus:plexus-container-default:2.1.0")
     testCompileOnly(gradleTestKit())
 }
 
@@ -102,14 +100,3 @@ pluginBundle {
 
 
 }
-
-/*
-publishing {
-    repositories {
-        maven {
-            name = "localPluginRepository"
-            url = uri(project.gradle.gradleUserHomeDir.absolutePath + "/.m2/repository")
-        }
-    }
-}
- */
