@@ -24,7 +24,6 @@ repositories {
 
 dependencies {
     implementation(gradleApi())
-    api("org.tukaani:xz:1.9")
     implementation("org.codehaus.plexus:plexus-archiver:4.2.5")
     implementation("org.codehaus.plexus:plexus-container-default:2.1.0")
     testCompileOnly(gradleTestKit())
