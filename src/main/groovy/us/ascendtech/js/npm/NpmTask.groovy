@@ -36,7 +36,7 @@ class NpmTask extends AbstractExecTask<NpmTask> {
 
     @Option(option = "baseArgs", description = "base args")
     public void setBaseArgs(String[] baseArgs) {
-        this.setBaseArgs = setBaseArgs
+        this.setBaseArgs = baseArgs
     }
 
     @Override
