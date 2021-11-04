@@ -12,7 +12,7 @@ import javax.inject.Inject
  * Apache 2.0 License
  * Based on https://github.com/solugo/gradle-nodejs-plugin
  */
-class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
+class NpmTask extends AbstractExecTask<NpmTask> {
 
     @Input
     def baseCmd = ""
@@ -26,11 +26,7 @@ class NpmTask<T extends NpmTask<T>> extends AbstractExecTask<T> {
 
     @Inject
     NpmTask() {
-        this(NpmTask)
-    }
-
-    NpmTask(final Class<T> taskType) {
-        super(taskType)
+        super(NpmTask.class)
     }
 
     @Option(option = "npmModule", description = "npm module")
