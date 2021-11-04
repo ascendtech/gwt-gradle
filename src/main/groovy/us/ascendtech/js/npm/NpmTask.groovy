@@ -30,6 +30,10 @@ abstract class NpmTask extends AbstractExecTask<NpmTask> {
     @Inject
     NpmTask() {
         super(NpmTask.class)
+        npmModule.convention("")
+        baseCmd.convention("")
+        baseArgs.convention([])
+        argsSuffix.convention([])
     }
 
 
