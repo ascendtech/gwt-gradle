@@ -54,7 +54,7 @@ class NpmPlugin implements Plugin<Project> {
                 }
 
                 for (String dep : newDeps) {
-                    int status = installNpmModule(npm, project, dep, (String[]) ["--save"])
+                    int status = installNpmModule(npm, project, dep, ["--save"])
                     if (status != 0) {
                         throw new GradleException("Failed to install gradle npm dependency " + dep)
                     }
@@ -73,7 +73,7 @@ class NpmPlugin implements Plugin<Project> {
                 }
 
                 for (String dep : newDeps) {
-                    int status = installNpmModule(npm, project, dep, (String[]) ["--save-dev"])
+                    int status = installNpmModule(npm, project, dep, ["--save-dev"])
                     if (status != 0) {
                         throw new GradleException("Failed to install gradle npm dev dependency " + dep)
                     }
@@ -92,27 +92,27 @@ class NpmPlugin implements Plugin<Project> {
         //cleanTask.dependsOn("npmClean")
 
         project.task("npmInstall", type: NpmTask) {
-            baseCmd = "npm"
+            baseCmd.set("npm")
             baseArgs.addAll("install")
             inputs.file(project.file("package.json"))
             outputs.dir(project.file("node_modules"))
         }
 
         project.task("npmInstallSaveDev", type: NpmTask) {
-            baseCmd = "npm"
-            baseArgs = ["install"]
-            argsSuffix = ["--save-dev"]
+            baseCmd.set("npm")
+            baseArgs.addAll("install")
+            argsSuffix.addAll("--save-dev")
         }
 
         project.task("npmInstallSave", type: NpmTask) {
-            baseCmd = "npm"
-            baseArgs = ["install"]
-            argsSuffix = ["--save"]
+            baseCmd.set("npm")
+            baseArgs.addAll("install")
+            argsSuffix.addAll("--save")
         }
 
         project.tasks.create(name: "webpack", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd = "webpack-cli"
-            baseArgs = ["--mode=production", "--output-path", "${npm.webpackOutputBase}"]
+            baseCmd.set("webpack-cli")
+            baseArgs.addAll("--mode=production", "--output-path", "${npm.webpackOutputBase}")
             inputs.file(project.file("webpack.config.js"))
             inputs.file(project.file("package-lock.json"))
             inputs.dir(npm.webpackInputBase)
@@ -120,24 +120,22 @@ class NpmPlugin implements Plugin<Project> {
         }
 
         project.tasks.create(name: "webpack5Dev", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd = "webpack"
-            baseArgs = ["serve", "--mode=development", "--content-base", "${npm.contentBase}"]
+            baseCmd.set("webpack")
+            baseArgs.addAll("serve", "--mode=development", "--content-base", "${npm.contentBase}")
         }
 
         project.tasks.create(name: "webpack4Dev", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd = "webpack-dev-server"
-            baseArgs = ["--mode=development", "--content-base", "${npm.contentBase}"]
+            baseCmd.set("webpack-dev-server")
+            baseArgs.addAll("--mode=development", "--content-base", "${npm.contentBase}")
         }
 
         project.configurations.create("npm")
     }
 
-    private int installNpmModule(NpmExtension npm, Project project, String npmModule, String[] argsSuffix) {
-        String baseCmd = "npm"
-        String[] baseArgs = ["install"]
+    private static int installNpmModule(NpmExtension npm, Project project, String npmModule, List<String> argsSuffix) {
 
         final NpmUtil nodeUtil = NpmUtil.getInstance(npm.nodeJsVersion)
-        List<String> commandLine = nodeUtil.buildCommandLine(project, baseCmd, baseArgs, npmModule, argsSuffix)
+        List<String> commandLine = nodeUtil.buildCommandLine(project, "npm", ["install"], npmModule, argsSuffix)
 
         ProcessBuilder builder = new ProcessBuilder().redirectErrorStream(true).command(commandLine)
         String path1 = builder.environment().get("PATH")
@@ -157,16 +155,15 @@ class NpmPlugin implements Plugin<Project> {
         InputStream stdout = process.getInputStream()
         BufferedReader reader = new BufferedReader(new InputStreamReader(stdout))
 
-        def line
+        String line
         while ((line = reader.readLine()) != null) {
             project.logger.info(line)
-
         }
 
         return process.waitFor()
     }
 
-    private void addDependentProjectLibs(Project project, NpmExtension npm) {
+    private static void addDependentProjectLibs(Project project, NpmExtension npm) {
         def allProjects = [] as LinkedHashSet<Project>
         GWTBaseTask.collectDependedUponProjects(project, allProjects, JavaPlugin.API_CONFIGURATION_NAME)
         allProjects.each { p ->
