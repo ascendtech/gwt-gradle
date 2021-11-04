@@ -15,7 +15,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.8.13"
+  id "us.ascendtech.gwt.modern" version "0.8.15"
 }
 
 gwt {
@@ -31,12 +31,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version " 0.8.13"
+    id "us.ascendtech.gwt.lib" version " 0.8.15"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.8.13"
+  id "us.ascendtech.gwt.modern" version "0.8.15"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -78,7 +78,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.8.13"
+  id "us.ascendtech.gwt.classic" version "0.8.15"
 }
 
 gwt {
@@ -92,12 +92,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.8.13"
+    id "us.ascendtech.gwt.lib" version "0.8.15"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.8.13"
+  id "us.ascendtech.gwt.classic" version "0.8.15"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -127,12 +127,12 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.8.13"
+    id "us.ascendtech.js.npm" version "0.8.15"
 }
 
 //all optional, defaults shown
 npm {
-   nodeJsVersion = "14.15.1"
+   nodeJsVersion = "16.13.0"
    webpackInputBase = "./src/main/webapp/"
    contentBase = "./src/main/webapp/public/" //only used in webpack5LegacyDev task, use static block in webpack.config.js instead for new webpack
 }
