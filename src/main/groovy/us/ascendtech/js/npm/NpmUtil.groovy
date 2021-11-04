@@ -26,9 +26,8 @@ class NpmUtil {
         File modules
         File bin
 
-        String platform = "undef"
-
-        String ext = "undef"
+        String platform
+        String ext
 
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             platform = "win"
@@ -112,14 +111,6 @@ class NpmUtil {
         this.bin = bin
     }
 
-    File getModules() {
-        return this.modules
-    }
-
-    File getHome() {
-        return this.home
-    }
-
     File getBin() {
         return this.bin
     }
@@ -150,22 +141,6 @@ class NpmUtil {
         return commandLine
     }
 
-    File resolveModule(final String module) {
-        final File globalFile = new File(this.modules, module)
-        if (globalFile.exists()) {
-            return globalFile
-        }
-
-
-        final File localFile = new File("node_modules", module)
-        if (localFile.exists()) {
-            return localFile
-        }
-
-        return null
-    }
-
-
     File resolveCommand(final File nodeModulesDir, final String command) {
         final String name
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -185,7 +160,7 @@ class NpmUtil {
         }
 
 
-        final File localFile = new File((String)nodeModulesDir + File.separator + ".bin", name)
+        final File localFile = new File(nodeModulesDir.toString() + File.separator + ".bin", name)
         if (localFile.exists()) {
             return localFile
         }

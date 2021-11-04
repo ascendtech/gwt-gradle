@@ -93,7 +93,7 @@ class NpmPlugin implements Plugin<Project> {
 
         project.task("npmInstall", type: NpmTask) {
             baseCmd = "npm"
-            baseArgs = ["install"]
+            baseArgs.addAll("install")
             inputs.file(project.file("package.json"))
             outputs.dir(project.file("node_modules"))
         }

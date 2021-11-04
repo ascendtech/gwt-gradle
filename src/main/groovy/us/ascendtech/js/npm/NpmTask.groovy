@@ -1,9 +1,9 @@
 package us.ascendtech.js.npm
 
-
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.AbstractExecTask
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.options.Option
 
 import javax.inject.Inject
 
@@ -12,16 +12,19 @@ import javax.inject.Inject
  * Apache 2.0 License
  * Based on https://github.com/solugo/gradle-nodejs-plugin
  */
-class NpmTask extends AbstractExecTask<NpmTask> {
+abstract class NpmTask extends AbstractExecTask<NpmTask> {
 
     @Input
-    def baseCmd = ""
+    abstract Property<String> getBaseCmd()
+
     @Input
-    List<String> baseArgs = []
+    abstract ListProperty<String> getBaseArgs()
+
     @Input
-    List<String> argsSuffix = []
+    abstract ListProperty<String> getArgsSuffix()
+
     @Input
-    def npmModule = ""
+    abstract Property<String> getNpmModule()
 
 
     @Inject
@@ -29,22 +32,13 @@ class NpmTask extends AbstractExecTask<NpmTask> {
         super(NpmTask.class)
     }
 
-    @Option(option = "npmModule", description = "npm module")
-    public void setNpmModule(String npmModule) {
-        this.npmModule = npmModule
-    }
-
-    @Option(option = "baseArgs", description = "base args")
-    public void setBaseArgs(List<String> baseArgs) {
-        this.setBaseArgs = baseArgs
-    }
 
     @Override
     protected void exec() {
         final NpmUtil nodeUtil = NpmUtil.getInstance(this.project.npm.nodeJsVersion)
 
 
-        ArrayList<String> commandLine = nodeUtil.buildCommandLine(project, baseCmd, baseArgs, npmModule, argsSuffix)
+        ArrayList<String> commandLine = nodeUtil.buildCommandLine(project, baseCmd.get(), baseArgs.get(), npmModule.get(), argsSuffix.get())
 
         project.logger.info("Adding to path ${nodeUtil.bin.absolutePath}")
 
