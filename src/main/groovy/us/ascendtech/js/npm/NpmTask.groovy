@@ -17,9 +17,9 @@ class NpmTask extends AbstractExecTask<NpmTask> {
     @Input
     def baseCmd = ""
     @Input
-    String[] baseArgs = []
+    List<String> baseArgs = []
     @Input
-    String[] argsSuffix = []
+    List<String> argsSuffix = []
     @Input
     def npmModule = ""
 
@@ -35,7 +35,7 @@ class NpmTask extends AbstractExecTask<NpmTask> {
     }
 
     @Option(option = "baseArgs", description = "base args")
-    public void setBaseArgs(String[] baseArgs) {
+    public void setBaseArgs(List<String> baseArgs) {
         this.setBaseArgs = baseArgs
     }
 

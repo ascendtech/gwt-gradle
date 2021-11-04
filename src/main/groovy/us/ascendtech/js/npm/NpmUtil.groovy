@@ -124,7 +124,7 @@ class NpmUtil {
         return this.bin
     }
 
-    ArrayList<String> buildCommandLine(final Project project, final String baseCmd, final String[] baseArgs, final String npmModule, final String[] argsSuffix) {
+    ArrayList<String> buildCommandLine(final Project project, final String baseCmd, final List<String> baseArgs, final String npmModule, final List<String> argsSuffix) {
         final commandLine = new ArrayList<String>()
 
         def nodeModulesDir = project.file("node_modules")
