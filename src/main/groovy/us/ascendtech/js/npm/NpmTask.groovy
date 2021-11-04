@@ -30,8 +30,13 @@ class NpmTask extends AbstractExecTask<NpmTask> {
     }
 
     @Option(option = "npmModule", description = "npm module")
-    public void setNpmArgs(String npmModule) {
+    public void setNpmModule(String npmModule) {
         this.npmModule = npmModule
+    }
+
+    @Option(option = "baseArgs", description = "base args")
+    public void setBaseArgs(String[] baseArgs) {
+        this.setBaseArgs = setBaseArgs
     }
 
     @Override
