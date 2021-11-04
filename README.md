@@ -1,7 +1,5 @@
-Requires Java 11
+Requires Java 11 and tested on Gradle 7.x only
 
-
-Use version 0.5.32 for Gradle 6.8 and version 0.7.1 for Gradle 7.x
 
 See below for npm plugin
 
@@ -17,7 +15,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.7.1"
+  id "us.ascendtech.gwt.modern" version "0.8.13"
 }
 
 gwt {
@@ -33,12 +31,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version " 0.7.1"
+    id "us.ascendtech.gwt.lib" version " 0.8.13"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.7.1"
+  id "us.ascendtech.gwt.modern" version "0.8.13"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -71,7 +69,7 @@ gradle compileJava —build-cache -t compileJava
 
 # gwt.classic
 
-A plugin for GWT 2.8 projects.  Compiles to war
+A plugin for GWT 2.9 projects.  Compiles to war
 
 ## Basic Usage
 
@@ -80,7 +78,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.7.1"
+  id "us.ascendtech.gwt.classic" version "0.8.13"
 }
 
 gwt {
@@ -94,12 +92,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.7.1"
+    id "us.ascendtech.gwt.lib" version "0.8.13"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.7.1"
+  id "us.ascendtech.gwt.classic" version "0.8.13"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -129,16 +127,26 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.7.1"
+    id "us.ascendtech.js.npm" version "0.8.13"
 }
 
 //all optional, defaults shown
 npm {
-   nodeJsVersion = "12.1.0"
+   nodeJsVersion = "14.15.1"
    webpackInputBase = "./src/main/webapp/"
-   contentBase = "./src/main/webapp/public/"
+   contentBase = "./src/main/webapp/public/" //only used in webpack5LegacyDev task, use static block in webpack.config.js instead for new webpack
 }
 
+```
+
+
+custom npm task in kotlin dsl
+```
+tasks.register<us.ascendtech.js.npm.NpmTask>("npmAuditFix") {
+    dependsOn("npmInstallDep", "npmInstall")
+    baseCmd.set("npm")
+    baseArgs.addAll("audit", "fix")
+}
 ```
 
 sample package.json
