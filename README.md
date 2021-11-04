@@ -141,7 +141,7 @@ npm {
 
 
 custom npm task in kotlin dsl
-```
+```gradle
 tasks.register<us.ascendtech.js.npm.NpmTask>("npmAuditFix") {
     dependsOn("npmInstallDep", "npmInstall")
     baseCmd.set("npm")
@@ -206,6 +206,13 @@ module.exports = {
         filename: "bundle.js"
     },
     devServer: {
+        port: 8080,
+        static: {
+            directory: path.resolve(__dirname, "src", "main", "webapp", "public"),
+            publicPath: "/",
+            serveIndex: true,
+            watch: true,
+        },
         proxy: {
             '/someapi': {
                 target: 'http://localhost:12111',
