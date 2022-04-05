@@ -64,12 +64,12 @@ class GWTLibPlugin implements Plugin<Project> {
 
             }
             if (gwt.libs.contains("ast-highcharts")) {
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.16'))
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.1.16:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.2.0'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.2.0:sources'))
 
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.16'))
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.1.16:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.2.0'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.2.0:sources'))
                 }
             }
             if (gwt.libs.contains("ast-wordcloud")) {
