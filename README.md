@@ -15,7 +15,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.9.1"
+  id "us.ascendtech.gwt.modern" version "0.9.2"
 }
 
 gwt {
@@ -31,12 +31,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version " 0.9.1"
+    id "us.ascendtech.gwt.lib" version " 0.9.2"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.modern" version "0.9.1"
+  id "us.ascendtech.gwt.modern" version "0.9.2"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -78,7 +78,7 @@ build.gradle
 ```gradle
 
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.9.1"
+  id "us.ascendtech.gwt.classic" version "0.9.2"
 }
 
 gwt {
@@ -92,12 +92,12 @@ gwt lib
 
 //gwt lib build.gradle
 plugins {
-    id "us.ascendtech.gwt.lib" version "0.9.1"
+    id "us.ascendtech.gwt.lib" version "0.9.2"
 }
 
 //app build.gradle
 plugins {
-  id "us.ascendtech.gwt.classic" version "0.9.1"
+  id "us.ascendtech.gwt.classic" version "0.9.2"
 }
 gwt {
     modules = ['com.company.SomeModule']   
@@ -127,7 +127,7 @@ NPM
 build.gradle
 ```gradle
 plugins {
-    id "us.ascendtech.js.npm" version "0.9.1"
+    id "us.ascendtech.js.npm" version "0.9.2"
 }
 
 //all optional, defaults shown
