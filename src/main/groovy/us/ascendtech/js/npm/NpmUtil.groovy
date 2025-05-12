@@ -7,8 +7,6 @@ import org.codehaus.plexus.archiver.tar.TarGZipUnArchiver
 import org.codehaus.plexus.archiver.tar.TarXZUnArchiver
 import org.codehaus.plexus.archiver.zip.ZipUnArchiver
 import org.codehaus.plexus.components.io.filemappers.FileMapper
-import org.codehaus.plexus.logging.Logger
-import org.codehaus.plexus.logging.console.ConsoleLogger
 import org.gradle.api.Project
 
 /**
@@ -87,7 +85,6 @@ class NpmUtil {
                 }
 
                 unArchiver.sourceFile = downloadFile
-                unArchiver.enableLogging(new ConsoleLogger(Logger.LEVEL_ERROR, "root"))
                 unArchiver.overwrite = true
                 unArchiver.destFile = target
                 unArchiver.extract()
