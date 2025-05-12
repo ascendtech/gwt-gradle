@@ -23,6 +23,8 @@ repositories {
     mavenCentral()
 }
 
+group = "us.ascendtech"
+
 dependencies {
     implementation(gradleApi())
     implementation("org.codehaus.plexus:plexus-archiver:4.10.0")
