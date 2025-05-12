@@ -1,0 +1,11 @@
+[versions]
+
+
+[libraries]
+
+[bundles]
+
+
+[plugins]
+reckon = { id = "org.ajoberstar.reckon", version = "0.19.2" }
+

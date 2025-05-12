@@ -7,7 +7,7 @@ package us.ascendtech.gwt.common
  */
 class GWTExtension {
 
-    String gwtVersion = "2.9.0"
+    String gwtVersion = "2.12.1"
 
     //list of modules to compile or run
     Collection<String> modules = []
@@ -42,7 +42,7 @@ class GWTExtension {
     boolean forceRecompile = true
 
     // Java version to use to compile the GWT code.
-    String sourceLevel = "1.11"
+    String sourceLevel = "17"
 
     boolean incremental = false
     boolean persistentunitcache = true
