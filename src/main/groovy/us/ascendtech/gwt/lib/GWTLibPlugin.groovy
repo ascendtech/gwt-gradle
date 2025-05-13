@@ -89,7 +89,7 @@ class GWTLibPlugin implements Plugin<Project> {
             }
 
             if (gwt.libs.contains("core")) {
-                deps.add(project.dependencies.create("org.gwtproject.core:gwt-core:1.0.0-RC1"))
+                deps.add(project.dependencies.create("org.gwtproject.core:gwt-core:1.0.0-RC2"))
             }
 
             if (gwt.libs.contains("event")) {
@@ -110,7 +110,7 @@ class GWTLibPlugin implements Plugin<Project> {
 
 
             if (gwt.includeGwtUser) {
-                deps.add(project.dependencies.create("com.google.gwt:gwt-user:${gwt.gwtVersion}"))
+                deps.add(project.dependencies.create("org.gwtproject:gwt-user:${gwt.gwtVersion}"))
             }
         }
 
@@ -134,7 +134,7 @@ class GWTLibPlugin implements Plugin<Project> {
         if (gwt.includeGwtUser) {
             project.configurations.all {
                 resolutionStrategy {
-                    force "com.google.gwt:gwt-user:${gwt.gwtVersion}"
+                    force "org.gwtproject:gwt-user:${gwt.gwtVersion}"
                 }
             }
         }
