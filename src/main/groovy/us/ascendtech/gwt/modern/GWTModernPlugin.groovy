@@ -32,7 +32,7 @@ class GWTModernPlugin implements Plugin<Project> {
         def gwtConf = project.configurations.create("gwt")
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.gwtproject", "gwt-dev", (String) gwt.gwtVersion))
         gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.gwtproject", "gwt", (String) gwt.gwtVersion))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("net.ltgt.gwt", "gwt-devserver", "1.0-SNAPSHOT"))
+        gwtConf.dependencies.add(new DefaultExternalModuleDependency("us.ascendtech", "gwt-devserver", "1.1"))
 
         final File gwtExtraDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "extras")
         final File gwtOutputDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "war")
