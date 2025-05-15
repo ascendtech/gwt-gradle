@@ -42,7 +42,7 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("autorest")) {
-                deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-gwt:0.9"))
+                deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-gwt:0.11"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("simplerest")) {
@@ -127,7 +127,7 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("autorest")) {
-                deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-processor:0.9"))
+                deps.add(project.dependencies.create("com.intendia.gwt.autorest:autorest-processor:0.11"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("simplerest")) {
