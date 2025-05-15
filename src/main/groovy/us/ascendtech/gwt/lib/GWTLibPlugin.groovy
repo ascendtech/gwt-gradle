@@ -46,35 +46,39 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("simplerest")) {
-                deps.add(project.dependencies.create("us.ascendtech:simplerest-core:0.5.3"))
-                deps.add(project.dependencies.create('us.ascendtech:simplerest-core:0.5.3:sources'))
+                deps.add(project.dependencies.create("us.ascendtech:simplerest-core:0.6.0"))
+                deps.add(project.dependencies.create('us.ascendtech:simplerest-core:0.6.0:sources'))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("ast-aggrid")) {
-                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.2.2'))
-                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.2.2:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.2.3'))
+                deps.add(project.dependencies.create('us.ascendtech:agGrid:0.2.3:sources'))
             }
             if (gwt.libs.contains("ast-momentjs")) {
-                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.11'))
-                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.1.11:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.4.0'))
+                deps.add(project.dependencies.create('us.ascendtech:momentjs:0.4.0:sources'))
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.11'))
-                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.1.11:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.4.0'))
+                    deps.add(project.dependencies.create('us.ascendtech:momentjs-injector:0.4.0:sources'))
                 }
 
             }
             if (gwt.libs.contains("ast-highcharts")) {
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.2.0'))
-                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.2.0:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.3.3'))
+                deps.add(project.dependencies.create('us.ascendtech:highcharts:1.3.3:sources'))
 
                 if (gwt.includeGwtUser) {
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.2.0'))
-                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.2.0:sources'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.3.3'))
+                    deps.add(project.dependencies.create('us.ascendtech:highcharts-injector:1.3.3:sources'))
                 }
             }
             if (gwt.libs.contains("ast-wordcloud")) {
-                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.3'))
-                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.0.3:sources'))
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.1.0'))
+                deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js:2.1.0:sources'))
+                if (gwt.includeGwtUser) {
+                    deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js-injector:2.1.0'))
+                    deps.add(project.dependencies.create('us.ascendtech:gwt-wordcloud2js-injector:2.1.0:sources'))
+                }
             }
 
             if (gwt.libs.contains("elemento-core-legacy")) {
@@ -127,7 +131,7 @@ class GWTLibPlugin implements Plugin<Project> {
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
             if (gwt.libs.contains("simplerest")) {
-                deps.add(project.dependencies.create("us.ascendtech:simplerest-processor:0.5.3"))
+                deps.add(project.dependencies.create("us.ascendtech:simplerest-processor:0.6.0"))
                 deps.add(project.dependencies.create("javax.annotation:javax.annotation-api:1.3.2"))
             }
         }
