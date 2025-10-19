@@ -3,24 +3,25 @@ package us.ascendtech.gwt.classic
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import us.ascendtech.gwt.common.GWTBaseTask
+import javax.inject.Inject
 
 /**
  * @author Luc Girardin
  * Apache 2.0 License
  */
-class GWTClassicDevTask extends GWTBaseTask {
+abstract class GWTClassicDevTask extends GWTBaseTask {
 
+    @Inject
+    GWTClassicDevTask() {
+        super()
+        mainClass.set("com.google.gwt.dev.codeserver.CodeServer")
+    }
 
     @Input
     String proxy
 
     @OutputDirectory
     File workDir
-
-
-    public GWTClassicDevTask() {
-        main = "com.google.gwt.dev.codeserver.CodeServer"
-    }
 
     @Override
     protected List<String> getGWTBaseArgs(Object gwt) {
