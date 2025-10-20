@@ -1,22 +1,25 @@
 package us.ascendtech.gwt.common
 
 import org.gradle.api.tasks.OutputDirectory
+import javax.inject.Inject
 
 /**
  * @author Matt Davis
  * @author Luc Girardin
  * Apache 2.0 License
  */
-class GWTCompileTask extends GWTBaseTask {
+abstract class GWTCompileTask extends GWTBaseTask {
+    @Inject
+    GWTCompileTask() {
+        super()
+        mainClass.set("com.google.gwt.dev.Compiler")
+    }
+
     @OutputDirectory
     File outputDir
 
     @OutputDirectory
     File extraOutputDir
-
-    public GWTCompileTask() {
-        mainClass.set("com.google.gwt.dev.Compiler")
-    }
 
     @Override
     protected List<String> getGWTBaseArgs(Object gwt) {

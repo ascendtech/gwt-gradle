@@ -1,14 +1,20 @@
 package us.ascendtech.gwt.common
 
 import org.gradle.api.Project
+import org.gradle.api.GradleException
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.JavaExec
-import org.gradle.api.tasks.StopActionException
+import javax.inject.Inject
 
 abstract class GWTBaseTask extends JavaExec {
+    @Inject
+    GWTBaseTask() {
+        super()
+    }
+
     @Input
     Collection<String> modules
 
@@ -48,7 +54,7 @@ abstract class GWTBaseTask extends JavaExec {
 
         if (gwt.modules == null || gwt.modules.size == 0) {
             logger.warn("No GWT Modules defined for project " + project.name)
-            throw new StopActionException("No gwt modules specified")
+            throw new GradleException("No gwt modules specified")
         }
 
 
