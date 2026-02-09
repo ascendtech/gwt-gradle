@@ -2,7 +2,7 @@
 
 Gradle plugins for GWT (Google Web Toolkit) projects with optional npm/webpack integration.
 
-Requires Java 11+ and Gradle 7.x+.
+Requires Java 11+ and Gradle 7.x - 9.x.
 
 Examples can be found at https://github.com/ascendtech/gwt-examples
 
@@ -198,7 +198,7 @@ plugins {
 
 ## npm-gradle
 
-A plugin that downloads and runs npm and webpack. NodeJS is downloaded to `~/.nodejs/<version>/`.
+A plugin that downloads and runs npm and webpack. NodeJS is downloaded to `~/.nodejs/<version>/`. Supports Linux, macOS, and Windows on x64 and ARM64 architectures.
 
 ### Basic Usage
 
