@@ -104,7 +104,7 @@ abstract class GWTBaseTask extends JavaExec {
         def config = project.configurations.findByName(type)
         if (config) {
             def projectDeps = config.allDependencies.withType(ProjectDependency)
-            def dependedUponProjects = projectDeps*.dependencyProject
+            def dependedUponProjects = projectDeps.collect { project.rootProject.findProject(it.path) }.findAll { it != null }
             result.addAll(dependedUponProjects)
             for (dependedUponProject in dependedUponProjects) {
                 collectDependedUponProjects(dependedUponProject, result, type)
