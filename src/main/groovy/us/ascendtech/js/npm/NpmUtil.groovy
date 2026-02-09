@@ -47,7 +47,10 @@ class NpmUtil {
         }
 
         final String arch
-        if (Os.isArch("x86")) {
+        String osArch = System.getProperty("os.arch")
+        if (osArch == "aarch64" || osArch == "arm64") {
+            arch = "arm64"
+        } else if (Os.isArch("x86")) {
             arch = "x86"
         } else {
             arch = "x64"
