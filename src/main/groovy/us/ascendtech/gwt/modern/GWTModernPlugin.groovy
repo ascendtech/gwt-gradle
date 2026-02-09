@@ -2,7 +2,6 @@ package us.ascendtech.gwt.modern
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.bundling.Compression
 import org.gradle.api.tasks.bundling.Tar
@@ -30,38 +29,39 @@ class GWTModernPlugin implements Plugin<Project> {
         def npm = project.extensions.findByType(NpmExtension)
 
         def gwtConf = project.configurations.create("gwt")
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.gwtproject", "gwt-dev", (String) gwt.gwtVersion))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("org.gwtproject", "gwt", (String) gwt.gwtVersion))
-        gwtConf.dependencies.add(new DefaultExternalModuleDependency("us.ascendtech", "gwt-devserver", "1.1"))
+        gwtConf.dependencies.add(project.dependencies.create("org.gwtproject:gwt-dev:${gwt.gwtVersion}"))
+        gwtConf.dependencies.add(project.dependencies.create("org.gwtproject:gwt:${gwt.gwtVersion}"))
+        gwtConf.dependencies.add(project.dependencies.create("us.ascendtech:gwt-devserver:1.1"))
 
-        final File gwtExtraDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "extras")
-        final File gwtOutputDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "war")
-        final File codeServerDir = project.file(project.getBuildDir().name + File.separator + "gwt" + File.separator + "codeServer")
+        final File gwtExtraDir = project.layout.buildDirectory.dir("gwt/extras").get().asFile
+        final File gwtOutputDir = project.layout.buildDirectory.dir("gwt/war").get().asFile
+        final File codeServerDir = project.layout.buildDirectory.dir("gwt/codeServer").get().asFile
 
 
-        project.task("gwtCompile", type: GWTCompileTask, dependsOn: ["classes", "webpack"]) {
-            outputDir = gwtOutputDir
-            extraOutputDir = gwtExtraDir
-            modules = gwt.modules
+        project.tasks.register("gwtCompile", GWTCompileTask) { GWTCompileTask task ->
+            task.dependsOn("classes", "webpack")
+            task.outputDir = gwtOutputDir
+            task.extraOutputDir = gwtExtraDir
+            task.modules = gwt.modules
         }
 
-        project.task("gwtDev", type: GWTModernDevTask, dependsOn: "classes") {
-            workDir = codeServerDir
-            proxy = gwt.proxy
-            modules = gwt.modules
+        project.tasks.register("gwtDev", GWTModernDevTask) { GWTModernDevTask task ->
+            task.dependsOn("classes")
+            task.workDir = codeServerDir
+            task.proxy = gwt.proxy
+            task.modules = gwt.modules
         }
 
-        project.task("gwtArchive", type: Tar, dependsOn: "gwtCompile") {
-            compression = Compression.GZIP
-            destinationDirectory = project.file(project.getBuildDir().name + File.separator + "webapp")
-            from gwtOutputDir
-            from npm.contentBase
-            from npm.webpackOutputBase
+        project.tasks.register("gwtArchive", Tar) { Tar task ->
+            task.dependsOn("gwtCompile")
+            task.compression = Compression.GZIP
+            task.destinationDirectory.set(project.layout.buildDirectory.dir("webapp"))
+            task.from gwtOutputDir
+            task.from npm.contentBase
+            task.from npm.webpackOutputBase
         }
 
 
     }
 
 }
-
-

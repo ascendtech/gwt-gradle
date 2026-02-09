@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.jvm.tasks.Jar
 import us.ascendtech.gwt.common.GWTBaseTask
 import us.ascendtech.gwt.common.GWTExtension
@@ -26,7 +27,7 @@ class GWTLibPlugin implements Plugin<Project> {
 
         project.repositories {
             maven {
-                url 'https://maven.ascend-tech.us/repo'
+                url = 'https://maven.ascend-tech.us/repo'
             }
         }
 
@@ -137,7 +138,7 @@ class GWTLibPlugin implements Plugin<Project> {
         }
 
         if (gwt.includeGwtUser) {
-            project.configurations.all {
+            project.configurations.configureEach {
                 resolutionStrategy {
                     force "org.gwtproject:gwt-user:${gwt.gwtVersion}"
                 }
@@ -145,10 +146,12 @@ class GWTLibPlugin implements Plugin<Project> {
         }
 
         if (gwt.forceRecompile) {
-            project.tasks.compileJava.options.compilerArgs << '-parameters'
-            project.tasks.compileJava.dependsOn(project.tasks.processResources)
+            project.tasks.named("compileJava").configure { JavaCompile task ->
+                task.options.compilerArgs << '-parameters'
+                task.dependsOn("processResources")
+                task.outputs.upToDateWhen { false }
+            }
             project.sourceSets.main.output.resourcesDir = "build/classes/java/main"
-            project.tasks.compileJava.outputs.upToDateWhen { false }
             project.logger.info("Forcing full recompile use --build-cache -t compileJava for continuous build")
         }
 

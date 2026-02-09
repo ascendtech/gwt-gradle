@@ -10,7 +10,7 @@ import org.gradle.api.Project
 class NpmExtension {
 
     NpmExtension(Project project) {
-        webpackOutputBase = project.file(project.getBuildDir().name + File.separator + "js").getAbsolutePath()
+        webpackOutputBase = project.layout.buildDirectory.dir("js").get().asFile.getAbsolutePath()
     }
 
     //version of node js to download and use

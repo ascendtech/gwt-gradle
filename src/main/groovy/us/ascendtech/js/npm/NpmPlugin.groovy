@@ -1,6 +1,5 @@
 package us.ascendtech.js.npm
 
-import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -23,7 +22,7 @@ class NpmPlugin implements Plugin<Project> {
             compile
         }
 
-        project.task("npmClean", type: DefaultTask) {
+        project.tasks.register("npmClean") {
             doLast {
 
 
@@ -33,7 +32,8 @@ class NpmPlugin implements Plugin<Project> {
             }
         }
 
-        project.task("npmInstallDep", type: DefaultTask, dependsOn: project.configurations.compile) {
+        project.tasks.register("npmInstallDep") {
+            dependsOn(project.configurations.compile)
 
             doFirst {
                 addDependentProjectLibs(project, npm)
@@ -89,42 +89,45 @@ class NpmPlugin implements Plugin<Project> {
         //final cleanTask = project.tasks.findByPath("clean")
         //cleanTask.dependsOn("npmClean")
 
-        project.task("npmInstall", type: NpmTask) {
-            baseCmd.set("npm")
-            baseArgs.addAll("install")
-            inputs.file(project.file("package.json"))
-            outputs.dir(project.file("node_modules"))
+        project.tasks.register("npmInstall", NpmTask) { NpmTask task ->
+            task.baseCmd.set("npm")
+            task.baseArgs.addAll("install")
+            task.inputs.file(project.file("package.json"))
+            task.outputs.dir(project.file("node_modules"))
         }
 
-        project.task("npmInstallSaveDev", type: NpmTask) {
-            baseCmd.set("npm")
-            baseArgs.addAll("install")
-            argsSuffix.addAll("--save-dev")
+        project.tasks.register("npmInstallSaveDev", NpmTask) { NpmTask task ->
+            task.baseCmd.set("npm")
+            task.baseArgs.addAll("install")
+            task.argsSuffix.addAll("--save-dev")
         }
 
-        project.task("npmInstallSave", type: NpmTask) {
-            baseCmd.set("npm")
-            baseArgs.addAll("install")
-            argsSuffix.addAll("--save")
+        project.tasks.register("npmInstallSave", NpmTask) { NpmTask task ->
+            task.baseCmd.set("npm")
+            task.baseArgs.addAll("install")
+            task.argsSuffix.addAll("--save")
         }
 
-        project.tasks.create(name: "webpack", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd.set("webpack-cli")
-            baseArgs.addAll("--mode=production", "--output-path", "${npm.webpackOutputBase}")
-            inputs.file(project.file("webpack.config.js"))
-            inputs.file(project.file("package-lock.json"))
-            inputs.dir(npm.webpackInputBase)
-            outputs.dir(npm.webpackOutputBase)
+        project.tasks.register("webpack", NpmTask) { NpmTask task ->
+            task.dependsOn("npmInstallDep", "npmInstall")
+            task.baseCmd.set("webpack-cli")
+            task.baseArgs.addAll("--mode=production", "--output-path", "${npm.webpackOutputBase}")
+            task.inputs.file(project.file("webpack.config.js"))
+            task.inputs.file(project.file("package-lock.json"))
+            task.inputs.dir(npm.webpackInputBase)
+            task.outputs.dir(npm.webpackOutputBase)
         }
 
-        project.tasks.create(name: "webpack5LegacyDev", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd.set("webpack")
-            baseArgs.addAll("serve", "--mode=development", "--content-base", "${npm.contentBase}")
+        project.tasks.register("webpack5LegacyDev", NpmTask) { NpmTask task ->
+            task.dependsOn("npmInstallDep", "npmInstall")
+            task.baseCmd.set("webpack")
+            task.baseArgs.addAll("serve", "--mode=development", "--content-base", "${npm.contentBase}")
         }
 
-        project.tasks.create(name: "webpack5Dev", type: NpmTask, dependsOn: ["npmInstallDep", "npmInstall"]) {
-            baseCmd.set("webpack")
-            baseArgs.addAll("serve", "--mode=development")
+        project.tasks.register("webpack5Dev", NpmTask) { NpmTask task ->
+            task.dependsOn("npmInstallDep", "npmInstall")
+            task.baseCmd.set("webpack")
+            task.baseArgs.addAll("serve", "--mode=development")
         }
 
         project.configurations.create("npm")
@@ -190,5 +193,3 @@ class NpmPlugin implements Plugin<Project> {
         project.logger.info("Project " + project.name + " has dev dependencies " + npm.devDependencies)
     }
 }
-
-
