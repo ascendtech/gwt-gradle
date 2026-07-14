@@ -7,7 +7,7 @@ package us.ascendtech.gwt.common
  */
 class GWTExtension {
 
-    String gwtVersion = "2.13.0"
+    String gwtVersion = "2.13.1"
 
     //list of modules to compile or run
     Collection<String> modules = []
